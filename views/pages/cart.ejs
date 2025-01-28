@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="New Tasty Bites - Delicious food in Mahul, India" />
+  <meta name="keywords" content="New Tasty Bites, fast food, burgers, pizza, Mahul, food delivery" />
+
+  <!-- Page Title -->
+  <title><%= title %> - New Tasty Bites</title>
+
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/styles.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for Icons -->
+  <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-gray-100 font-roboto">
+  <!-- Navbar -->
+  <%- include('../partials/_navbar') %>
+
+  <!-- Main Container -->
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-semibold mb-6">Your Cart</h1>
+
+    <!-- Success and Error Messages -->
+    <%- include('../partials/_flash_messages') %>
+
+    <% if (cart && cart.totalQty > 0) { %>
+      <!-- Cart Items -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Cart Items List -->
+        <div class="md:col-span-2">
+          <% Object.values(cart.items).forEach(function(cartItem) { %>
+            <div class="bg-white rounded-lg shadow-md flex mb-6 overflow-hidden">
+              <!-- Product Image -->
+              <img src="<%= cartItem.item.imageURL %>" alt="<%= cartItem.item.name %>" class="w-36 h-44 object-cover">
+              <!-- Product Details -->
+              <div class="flex-1 p-4 flex flex-col justify-between">
+                <div>
+                  <h2 class="text-xl font-semibold"><%= cartItem.item.name %></h2>
+                  <p class="text-gray-600">Price: <span class="text-green-600 font-bold">₹<%= cartItem.item.price %></span></p>
+                </div>
+                <div class="flex items-center mt-4 flex-col sm:flex-row">
+                  <!-- Quantity Controls -->
+                  <form action="/cart/update" method="POST" class="flex items-center">
+                    <input type="hidden" name="itemId" value="<%= cartItem.item.id %>">
+                    <button type="submit" name="action" value="decrease" class="px-4 py-2 bg-gray-200 rounded-l hover:bg-gray-300 text-xl">
+                      <i class="fas fa-minus-circle text-red-500">-</i>
+                    </button>
+                    <span class="px-4 py-2 border-t border-b border-gray-200 text-lg font-semibold"><%= cartItem.qty %></span>
+                    <button type="submit" name="action" value="increase" class="px-4 py-2 bg-gray-200 rounded-r hover:bg-gray-300 text-xl">
+                      <i class="fas fa-plus-circle text-green-500">+</i>
+                    </button>
+                  </form>
+                  <!-- Remove Button -->
+                  <form action="/cart/update" method="POST" class="mt-2 sm:mt-0 sm:ml-4">
+                    <input type="hidden" name="itemId" value="<%= cartItem.item.id %>">
+                    <button type="submit" name="action" value="remove" class="text-red-600 hover:text-red-800 flex items-center">
+                      <i class="fas fa-trash-alt mr-1"></i> Remove
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <!-- Total Price -->
+              <div class="p-4 text-right flex items-end">
+                <p class="text-lg font-bold text-indigo-600">₹<%= cartItem.item.price * cartItem.qty %></p>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+          <h2 class="text-2xl font-semibold mb-4">Order Summary</h2>
+          <div class="flex justify-between mb-2 text-lg">
+            <span>Total Quantity:</span>
+            <span><%= cart.totalQty %></span>
+          </div>
+          <div class="flex justify-between mb-4 text-xl font-bold">
+            <span>Subtotal:</span>
+            <span class="text-indigo-600">₹<%= cart.totalPrice %></span>
+          </div>
+          <% if (cart.totalPrice >= 350) { %>
+            <button id="checkout-btn" class="w-full bg-green-500 text-white py-3 rounded hover:bg-green-600 text-xl font-semibold shadow-lg transition duration-300">
+              Proceed to Checkout
+            </button>
+          <% } else { %>
+            <p class="text-red-500 font-semibold">Minimum order amount is ₹350 for delivery.</p>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Address Input Modal -->
+      <div id="address-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+        <div class="bg-white rounded-lg w-11/12 md:w-1/2 lg:w-1/3 p-6 relative">
+          <button id="close-modal" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+          <h2 class="text-2xl font-semibold mb-4">Enter Delivery Address</h2>
+          <form id="address-form" action="/checkout" method="POST">
+            <!-- Full Name -->
+            <div class="mb-4">
+              <label for="fullName" class="block font-medium mb-1">Full Name</label>
+              <input type="text" id="fullName" name="fullName" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Enter your full name">
+            </div>
+
+            <!-- Street Address -->
+            <div class="mb-4">
+              <label for="streetAddress" class="block font-medium mb-1">Street Address</label>
+              <input type="text" id="streetAddress" name="streetAddress" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Enter your street address">
+            </div>
+
+            <!-- Apartment (Optional) -->
+            <div class="mb-4">
+              <label for="apartment" class="block font-medium mb-1">Apartment (Optional)</label>
+              <input type="text" id="apartment" name="apartment" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Enter your apartment (if any)">
+            </div>
+
+            <!-- Zip Code -->
+            <div class="mb-6">
+              <label for="zipCode" class="block font-medium mb-1">Zip Code</label>
+              <input type="text" id="zipCode" name="zipCode" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Enter your zip code">
+            </div>
+
+            <button type="submit" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 text-lg font-medium shadow-md transition duration-300">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+
+    <% } else { %>
+      <!-- Empty Cart -->
+      <div class="bg-white rounded-lg shadow-md p-6 text-center">
+        <p class="text-xl">Your cart is empty.</p>
+        <a href="/menu" class="mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300">Browse our menu</a>
+      </div>
+    <% } %>
+
+  </div>
+
+  <!-- Footer -->
+  <%- include("../partials/_footer") %>
+
+  <!-- Scripts -->
+  <script>
+    // Modal Functionality
+    const modal = document.getElementById("address-modal");
+    const checkoutButton = document.getElementById("checkout-btn");
+    const closeModalButton = document.getElementById("close-modal");
+
+    // Open modal on checkout button click
+    if (checkoutButton) {
+      checkoutButton.addEventListener("click", function() {
+        modal.classList.remove('hidden');
+      });
+    }
+
+    // Close the modal when the close button is clicked
+    closeModalButton.addEventListener("click", function() {
+      modal.classList.add('hidden');
+    });
+
+    // Close the modal if the user clicks outside the modal content
+    window.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

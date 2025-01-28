@@ -1,0 +1,10 @@
+<footer class="bg-gray-800 text-white py-6 mt-12">
+  <div class="container mx-auto text-center">
+    <p>© <%= new Date().getFullYear() %> New Tasty Bites. All rights reserved.</p>
+    <% if (!session.isAdmin) { %>
+      <a href="/admin/login" class="text-gray-400 hover:text-white text-sm mt-2 block">Admin Login</a>
+    <% } else { %>
+      <a href="/admin/logout" class="text-gray-400 hover:text-white text-sm mt-2 block">Logout</a>
+    <% } %>
+  </div>
+</footer>

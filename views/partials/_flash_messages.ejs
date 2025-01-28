@@ -1,0 +1,33 @@
+<div class="flash-message-container">
+    <% if (success_messages && success_messages.length > 0) { %>
+        <% success_messages.forEach(function(message){ %>
+            <div class="flash-message success-message">
+                <p><%= message %></p>
+            </div>
+        <% }) %>
+    <% } %>
+
+    <% if (error_messages && error_messages.length > 0) { %>
+        <% error_messages.forEach(function(message){ %>
+            <div class="flash-message error-message">
+                <p><%= message %></p>
+            </div>
+        <% }) %>
+    <% } %>
+</div>
+
+<script>
+    // Set the time to auto-hide the flash messages
+    setTimeout(function() {
+        const successMessages = document.querySelectorAll('.flash-message.success-message');
+        const errorMessages = document.querySelectorAll('.flash-message.error-message');
+        
+        successMessages.forEach(function(msg) {
+            msg.style.display = 'none';  // Hide success message after 3 seconds
+        });
+
+        errorMessages.forEach(function(msg) {
+            msg.style.display = 'none';  // Hide error message after 3 seconds
+        });
+    }, 3000); // 3000 milliseconds = 3 seconds
+</script>

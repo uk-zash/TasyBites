@@ -1,0 +1,49 @@
+
+.flash-message-container {
+    position: fixed; /* Position the flash message container fixed on top */
+    top: 0; /* Align at the top */
+    left: 0; /* Align to the left of the screen */
+    right: 0; /* Span full width */
+    z-index: 9999; /* Ensure it sits on top of all other content */
+    pointer-events: none; /* Allow clicks to go through the flash message container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px; /* Offset from the very top */
+    width: 100%;
+}
+
+.flash-message {
+    max-width: 90%;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.5s ease-in-out;
+}
+
+.success-message {
+    background-color: #d4edda; /* Green background for success */
+    border-left: 4px solid #28a745; /* Green left border */
+    color: #155724;
+}
+
+.error-message {
+    background-color: #f8d7da; /* Red background for error */
+    border-left: 4px solid #dc3545; /* Red left border */
+    color: #721c24;
+}
+
+.flash-message.success-message,
+.flash-message.error-message {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Optional: Add a smooth fade-out effect after a timeout */
+.flash-message.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="New Tasty Bites - Delicious food in Mahul, India" />
+    <meta name="keywords" content="New Tasty Bites, fast food, burgers, pizza, Mahul, food delivery" />
+    <meta property="og:title" content="<%= title %> | New Tasty Bites" />
+    <meta property="og:description" content="Enjoy the best food at New Tasty Bites." />
+    <meta property="og:image" content="/images/og-image.jpg" />
+    <meta charset="UTF-8" />
+    <title><%= title %> - New Tasty Bites</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/card.css">
+    <style>
+      /* Banner Container */
+      .banner {
+        height: 200px;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      /* For image banners */
+      .banner img {
+        object-fit: cover;
+        width: 100%;
+        height: 50%;
+        object-position: center;
+      }
+
+      /* For text banners */
+      .banner-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background-color: #fbbf24; /* Light yellow background */
+        text-align: center;
+        padding: 10px;
+        font-size: 1.5rem; /* Default font size */
+        font-weight: 700;
+        color: #333;
+        position: relative;
+        flex-direction: row; /* Align text horizontally */
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden; /* Ensure content doesn't overflow */
+        text-overflow: ellipsis; /* Add ellipsis for overflow text */
+      }
+
+      /* Custom Style for Percentages */
+      .highlight-percent {
+  color: #f56565; /* Red color for percentage */
+  font-weight: bold;
+  font-style: italic; /* Make percentage text italic */
+  text-decoration: underline; /* Underline percentage */
+}
+
+/* Custom Style for Rupee Amounts */
+.highlight-rupee {
+  color: #48bb78; /* Green color for rupee amounts */
+  font-weight: bold;
+  font-style: normal; /* You can make rupee values normal or bold */
+  text-decoration: none; /* Optional: Remove any underline from rupee values */
+}
+
+      /* Call-to-Action Button */
+      .cta-button {
+        background-color: #ffffff;
+        color: #fbbf24;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: background-color 0.3s;
+      }
+
+      .cta-button:hover {
+        background-color: #fbbf24;
+        color: #ffffff;
+      }
+      /* Responsive Text for Small Screens */
+      @media (max-width: 768px) {
+        .banner-text {
+          font-size: 1.25rem;
+          white-space: nowrap; /* Smaller font on mobile */
+        }
+
+        .banner {
+          height: auto;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .banner-text {
+          font-size: 1rem; /* Even smaller font size on smaller screens */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../partials/_navbar') %>
+
+    <div class="mx-auto px-1 md:px-4 mt-20 md:mt-20">
+
+        <div class="container mx-auto px-4 mt-16">
+          <h1 class="text-2xl font-semibold mb-6">Search Results for "<%= query %>"</h1>
+        
+          <% if (items && items.length > 0) { %>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <% items.forEach(function(item) { %>
+                <div class="bg-white rounded-lg shadow p-4">
+                  <!-- Product Image -->
+                  <a href="/product/<%= item.id %>">
+                    <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="w-full h-48 object-cover rounded">
+                  </a>
+                  <div class="mt-4">
+                    <!-- Product Name -->
+                    <a href="/product/<%= item.id %>">
+                      <h3 class="text-xl font-semibold hover:text-blue-500"><%= item.name %></h3>
+                    </a>
+                    <p class="text-gray-600"><%= item.description %></p>
+                    <p class="text-lg font-bold mt-2">₹<%= item.price %></p>
+                  </div>
+                  <!-- Add to Cart Form -->
+                  <form action="/add-to-cart" method="POST" class="mt-4">
+                    <input type="hidden" name="id" value="<%= item.id %>">
+                    <button type="submit" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">
+                      Add to Cart
+                    </button>
+                  </form>
+                </div>
+              <% }); %>
+            </div>
+          <% } else { %>
+            <p>No items found matching your search.</p>
+          <% } %>
+        </div>
+
+    </div>
+
+    <%- include("../partials/_footer") %>
+
+    <script>
+      // Get elements
+      const hamburgerMenuButton = document.getElementById("hamburger-menu");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      // Toggle menu visibility on hamburger click
+      hamburgerMenuButton.addEventListener("click", function() {
+        mobileMenu.classList.toggle("open"); // Show or hide the mobile menu
+        hamburgerMenuButton.classList.toggle("active"); // Toggle hamburger to cross and vice versa
+      });
+    </script>
+  </body>
+</html>

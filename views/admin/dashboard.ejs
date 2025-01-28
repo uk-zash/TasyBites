@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Existing meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="New Tasty Bites - Delicious food in Mahul, India"
+    />
+    <meta
+      name="keywords"
+      content="New Tasty Bites, fast food, burgers, pizza, Mahul, food delivery"
+    />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="<%= title %> | New Tasty Bites" />
+    <meta
+      property="og:description"
+      content="Enjoy the best food at New Tasty Bites."
+    />
+    <meta property="og:image" content="/images/og-image.jpg" />
+    <!-- Replace with actual image path -->
+    <!-- Twitter -->
+    <meta name="twitter:title" content="<%= title %> | New Tasty Bites" />
+    <meta
+      name="twitter:description"
+      content="Enjoy the best food at New Tasty Bites."
+    />
+    <meta name="twitter:image" content="/images/og-image.jpg" />
+    <!-- Replace with actual image path -->
+
+    <meta charset="UTF-8" />
+    <title><%= title %> - New Tasty Bites</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/nav.css">
+  </head>
+  <body>
+<%- include('../partials/_navbar') %>
+
+<div class="container mx-auto px-4 mt-20">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Existing admin links -->
+        <a href="/admin/menu" class="bg-white rounded shadow p-4 hover:bg-gray-100">
+          <h2 class="text-xl font-semibold mb-2">Manage Menu Items</h2>
+          <p>View, add, edit, or delete menu items.</p>
+        </a>
+        <a href="/admin/banner" class="bg-white rounded shadow p-4 hover:bg-gray-100">
+          <h2 class="text-xl font-semibold mb-2">Manage Promotional Banner</h2>
+          <p>Update the promotional banner displayed on the homepage.</p>
+        </a>
+
+        <a href="/admin/reviews" class="bg-white rounded shadow p-4 hover:bg-gray-100">
+          <h2 class="text-xl font-semibold mb-2">Manage Reviews</h2>
+          <p>Approve or delete customer reviews.</p>
+        </a>
+        <!-- Add other admin links as needed -->
+      </div>
+
+</div>
+
+<%- include("../partials/_footer") %>
+
+<script>
+  // Get elements
+  const hamburgerMenuButton = document.getElementById("hamburger-menu");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  // Toggle menu visibility on hamburger click
+  hamburgerMenuButton.addEventListener("click", function() {
+    mobileMenu.classList.toggle("open"); // Show or hide the mobile menu
+    hamburgerMenuButton.classList.toggle("active"); // Toggle hamburger to cross and vice versa
+  });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Existing meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="New Tasty Bites - Delicious food in Mahul, India"
+    />
+    <meta
+      name="keywords"
+      content="New Tasty Bites, fast food, burgers, pizza, Mahul, food delivery"
+    />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="<%= title %> | New Tasty Bites" />
+    <meta
+      property="og:description"
+      content="Enjoy the best food at New Tasty Bites."
+    />
+    <meta property="og:image" content="/images/og-image.jpg" />
+    <!-- Replace with actual image path -->
+    <!-- Twitter -->
+    <meta name="twitter:title" content="<%= title %> | New Tasty Bites" />
+    <meta
+      name="twitter:description"
+      content="Enjoy the best food at New Tasty Bites."
+    />
+    <meta name="twitter:image" content="/images/og-image.jpg" />
+    <!-- Replace with actual image path -->
+
+    <meta charset="UTF-8" />
+    <title><%= title %> - New Tasty Bites</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/nav.css">
+  </head>
+  <body>
+<%- include('../partials/_navbar') %>
+
+<div class="container mx-auto px-4 mt-20">
+
+<div class="container mx-auto px-4 mt-16 max-w-lg">
+  <h1 class="text-2xl font-semibold mb-6">Edit Menu Item</h1>
+
+  <!-- Display success or error messages -->
+  <% if (success_messages && success_messages.length > 0) { %>
+    <% success_messages.forEach(function(message) { %>
+      <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
+        <p><%= message %></p>
+      </div>
+    <% }); %>
+  <% } %>
+  <% if (error_messages && error_messages.length > 0) { %>
+    <% error_messages.forEach(function(message) { %>
+      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+        <p><%= message %></p>
+      </div>
+    <% }); %>
+  <% } %>
+
+  <form action="/admin/menu/edit/<%= item.id %>" method="POST" enctype="multipart/form-data">
+    <div class="mb-4">
+      <label class="block text-gray-700">Name</label>
+      <input type="text" name="name" value="<%= item.name %>" class="w-full border border-gray-300 rounded px-3 py-2" required>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700">Description</label>
+      <textarea name="description" rows="3" class="w-full border border-gray-300 rounded px-3 py-2"><%= item.description %></textarea>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700">Price</label>
+      <input type="number" step="0.01" name="price" value="<%= item.price %>" class="w-full border border-gray-300 rounded px-3 py-2" required>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700">Category</label>
+      <input type="text" name="category" value="<%= item.category %>" class="w-full border border-gray-300 rounded px-3 py-2" required>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700">Popular Item</label>
+      <input type="checkbox" name="popular" <%= item.popular ? 'checked' : '' %>>
+    </div>
+    <div class="mb-6">
+      <label class="block text-gray-700">Image</label>
+      <input type="file" name="image" accept="image/*" class="w-full">
+      <% if (item.imageURL) { %>
+        <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="w-32 h-32 mt-2">
+      <% } %>
+    </div>
+    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+      Update Item
+    </button>
+  </form>
+</div>
+
+</div>
+
+<%- include("../partials/_footer") %>
+
+<script>
+  // Get elements
+  const hamburgerMenuButton = document.getElementById("hamburger-menu");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  // Toggle menu visibility on hamburger click
+  hamburgerMenuButton.addEventListener("click", function() {
+    mobileMenu.classList.toggle("open"); // Show or hide the mobile menu
+    hamburgerMenuButton.classList.toggle("active"); // Toggle hamburger to cross and vice versa
+  });
+</script>
+
+
+
+
+
+
+</body>
+</html>

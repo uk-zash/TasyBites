@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Existing meta tags -->
+    <meta
+      name="description"
+      content="New Tasty Bites - Delicious food in Mahul, India"
+    />
+    <meta
+      name="keywords"
+      content="New Tasty Bites, fast food, burgers, pizza, Mahul, food delivery"
+    />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="<%= title %> | New Tasty Bites" />
+    <meta
+      property="og:description"
+      content="Enjoy the best food at New Tasty Bites."
+    />
+    <meta property="og:image" content="/images/og-image.jpg" />
+    <!-- Replace with actual image path -->
+    <!-- Twitter -->
+    <meta name="twitter:title" content="<%= title %> | New Tasty Bites" />
+    <meta
+      name="twitter:description"
+      content="Enjoy the best food at New Tasty Bites."
+    />
+    <meta name="twitter:image" content="/images/og-image.jpg" />
+    <!-- Replace with actual image path -->
+
+    <meta charset="UTF-8" />
+    <title><%= title %> - New Tasty Bites</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <%- include("../partials/_navbar") %>
+
+    <div class="container mx-auto px-4 mt-6"><%- body %></div>
+
+    <%- include ("../partials/_footer") %>
+  </body>
+</html>

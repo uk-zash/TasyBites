@@ -1,0 +1,121 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a href="/" class="logo">Bites</a>
+
+    <!-- Navigation Links (Desktop) -->
+    <div class="navbar-links">
+      <a href="/">Home</a>
+      <a href="/menu">Menu</a>
+
+      <!-- Search Form (Desktop) -->
+      <form action="/search" method="GET" class="search-form">
+        <input type="text" name="q" placeholder="Search..." class="search-input" required>
+        <button type="submit" class="search-button">
+          <!-- Search Icon -->
+          <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </form>
+
+      <!-- Show 'Call Now' and 'Cart' only for regular users -->
+      <% if (!session.isAdmin) { %>
+        <a href="tel:+91XXXXXXXXXX" class="call-now"><span>Call Now</span></a>
+        <a href="/cart" class="cart">
+          <!-- Cart Item Count Badge -->
+          <% if (session.cart && session.cart.totalQty > 0) { %>
+            <span class="cart-badge"><%= session.cart.totalQty %></span>
+          <% } %>
+          <!-- Cart Icon -->
+          <svg class="cart-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4"></path>
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+          </svg>
+        </a>
+      <% } %>
+
+      <!-- Admin Links (Show only if admin) -->
+      <% if (session.isAdmin) { %>
+        <a href="/admin/dashboard">Dashboard</a>
+        <a href="/admin/logout">Logout</a>
+      <% } %>
+    </div>
+
+    <!-- Mobile Menu Button (Hamburger) -->
+    <div class="hamburger-container">
+      <button id="hamburger-menu" class="hamburger">
+        <!-- Hamburger Icon -->
+        <svg id="hamburger-icon" class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        
+        <!-- Close (X) Icon -->
+        <svg id="close-icon" class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (Hidden by default) -->
+  <div id="mobile-menu" class="mobile-menu">
+    <!-- Search Form in Mobile Menu -->
+    <form action="/search" method="GET" class="search-form-mobile">
+      <input type="text" name="q" placeholder="Search..." class="search-input" required>
+      <button type="submit" class="search-button">
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </form>
+
+    <a href="/">Home</a>
+    <a href="/menu">Menu</a>
+
+    <!-- Show 'Call Now' and 'Cart' only for regular users -->
+    <% if (!session.isAdmin) { %>
+      <a href="tel:+91XXXXXXXXXX" class="call-now">Call Now</a>
+      <a href="/cart" class="cart">
+        <% if (session.cart && session.cart.totalQty > 0) { %>
+          <span class="cart-badge"><%= session.cart.totalQty %></span>
+        <% } %>
+        <!-- Cart Icon -->
+        <svg class="cart-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4"></path>
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+        </svg>
+      </a>
+    <% } %>
+
+    <!-- Admin Links in Mobile Menu -->
+    <% if (session.isAdmin) { %>
+      <a href="/admin/dashboard">Dashboard</a>
+      <a href="/admin/logout">Logout</a>
+    <% } %>
+  </div>
+</nav>
+
+<!-- JavaScript for Toggle Behavior -->
+<script>
+  const hamburgerButton = document.getElementById("hamburger-menu");
+  const hamburgerIcon = document.getElementById("hamburger-icon");
+  const closeIcon = document.getElementById("close-icon");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  // Toggle the mobile menu visibility and icons
+  hamburgerButton.addEventListener("click", function() {
+    mobileMenu.classList.toggle("open");
+    hamburgerIcon.style.display = hamburgerIcon.style.display === "none" ? "block" : "none";
+    closeIcon.style.display = closeIcon.style.display === "none" ? "block" : "none";
+  });
+</script>
