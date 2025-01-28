@@ -1,10 +1,12 @@
 const admin = require("firebase-admin")
-const serviceAccount = require("./serviceAccountKey.json")
+require('dotenv').config();
+const firebaseServiceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'tastybites-390b3.appspot.com'
-})
+  credential: admin.credential.cert(firebaseServiceAccount),
+  storageBucket: 'tastybites-390b3.appspot.com',
+});
+
 const db = admin.firestore();
 
 
