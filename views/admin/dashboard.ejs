@@ -1,81 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Existing meta tags -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="New Tasty Bites - Delicious food in Mahul, India"
-    />
-    <meta
-      name="keywords"
-      content="New Tasty Bites, fast food, burgers, pizza, Mahul, food delivery"
-    />
-    <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="<%= title %> | New Tasty Bites" />
-    <meta
-      property="og:description"
-      content="Enjoy the best food at New Tasty Bites."
-    />
-    <meta property="og:image" content="/images/og-image.jpg" />
-    <!-- Replace with actual image path -->
-    <!-- Twitter -->
-    <meta name="twitter:title" content="<%= title %> | New Tasty Bites" />
-    <meta
-      name="twitter:description"
-      content="Enjoy the best food at New Tasty Bites."
-    />
-    <meta name="twitter:image" content="/images/og-image.jpg" />
-    <!-- Replace with actual image path -->
-
-    <meta charset="UTF-8" />
-    <title><%= title %> - New Tasty Bites</title>
-    <link rel="stylesheet" href="/css/styles.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - New Tasty Bites Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/nav.css">
-  </head>
-  <body>
-<%- include('../partials/_navbar') %>
+    <style>
+        .admin-card:hover .admin-card-icon {
+            transform: rotate(-5deg) scale(1.1);
+        }
+        .stats-card:hover {
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <%- include('../partials/_navbar') %>
 
-<div class="container mx-auto px-4 mt-20">
+    <div class="container mx-auto px-4 py-8 max-w-7xl mt-20">
+        <!-- Dashboard Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+            <p class="text-gray-600 mt-2">Welcome back, Administrator</p>
+        </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Existing admin links -->
-        <a href="/admin/menu" class="bg-white rounded shadow p-4 hover:bg-gray-100">
-          <h2 class="text-xl font-semibold mb-2">Manage Menu Items</h2>
-          <p>View, add, edit, or delete menu items.</p>
-        </a>
-        <a href="/admin/banner" class="bg-white rounded shadow p-4 hover:bg-gray-100">
-          <h2 class="text-xl font-semibold mb-2">Manage Promotional Banner</h2>
-          <p>Update the promotional banner displayed on the homepage.</p>
-        </a>
+        <!-- Quick Stats -->
+        <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-md stats-card transition-all duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Total Menu Items</p>
+                        <p class="text-3xl font-bold text-indigo-600">125</p>
+                    </div>
+                    <i class="fas fa-utensils text-4xl text-indigo-200"></i>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-md stats-card transition-all duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Pending Reviews</p>
+                        <p class="text-3xl font-bold text-green-600">23</p>
+                    </div>
+                    <i class="fas fa-comments text-4xl text-green-200"></i>
+                </div>
+            </div>
 
-        <a href="/admin/reviews" class="bg-white rounded shadow p-4 hover:bg-gray-100">
-          <h2 class="text-xl font-semibold mb-2">Manage Reviews</h2>
-          <p>Approve or delete customer reviews.</p>
-        </a>
-        <!-- Add other admin links as needed -->
-      </div>
+            <div class="bg-white rounded-xl p-6 shadow-md stats-card transition-all duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Active Promotions</p>
+                        <p class="text-3xl font-bold text-purple-600">3</p>
+                    </div>
+                    <i class="fas fa-bullhorn text-4xl text-purple-200"></i>
+                </div>
+            </div>
+        </div> -->
 
-</div>
+        <!-- Admin Actions Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Manage Menu -->
+            <a href="/admin/menu" class="admin-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-200 group">
+                <div class="flex items-center space-x-4">
+                    <div class="admin-card-icon bg-indigo-100 p-4 rounded-lg transition-all duration-300">
+                        <i class="fas fa-utensils text-3xl text-indigo-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">Menu Management</h2>
+                        <p class="text-gray-600">Manage food items and categories</p>
+                    </div>
+                </div>
+            </a>
 
-<%- include("../partials/_footer") %>
+            <!-- Banner Management -->
+            <a href="/admin/banner" class="admin-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-200 group">
+                <div class="flex items-center space-x-4">
+                    <div class="admin-card-icon bg-green-100 p-4 rounded-lg transition-all duration-300">
+                        <i class="fas fa-image text-3xl text-green-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">Promotional Banners</h2>
+                        <p class="text-gray-600">Update homepage banners and promotions</p>
+                    </div>
+                </div>
+            </a>
 
-<script>
-  // Get elements
-  const hamburgerMenuButton = document.getElementById("hamburger-menu");
-  const mobileMenu = document.getElementById("mobile-menu");
+            <!-- Reviews Management -->
+            <a href="/admin/reviews" class="admin-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-200 group">
+                <div class="flex items-center space-x-4">
+                    <div class="admin-card-icon bg-purple-100 p-4 rounded-lg transition-all duration-300">
+                        <i class="fas fa-comments text-3xl text-purple-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">Customer Reviews</h2>
+                        <p class="text-gray-600">Moderate and manage customer feedback</p>
+                    </div>
+                </div>
+            </a>
 
-  // Toggle menu visibility on hamburger click
-  hamburgerMenuButton.addEventListener("click", function() {
-    mobileMenu.classList.toggle("open"); // Show or hide the mobile menu
-    hamburgerMenuButton.classList.toggle("active"); // Toggle hamburger to cross and vice versa
-  });
-</script>
+            <!-- Order Management -->
+            <!-- <a href="/admin/orders" class="admin-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-200 group">
+                <div class="flex items-center space-x-4">
+                    <div class="admin-card-icon bg-blue-100 p-4 rounded-lg transition-all duration-300">
+                        <i class="fas fa-shopping-cart text-3xl text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">Order Management</h2>
+                        <p class="text-gray-600">View and manage customer orders</p>
+                    </div>
+                </div>
+            </a> -->
 
+            <!-- User Management -->
+            <!-- <a href="/admin/users" class="admin-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-200 group">
+                <div class="flex items-center space-x-4">
+                    <div class="admin-card-icon bg-yellow-100 p-4 rounded-lg transition-all duration-300">
+                        <i class="fas fa-users text-3xl text-yellow-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">User Management</h2>
+                        <p class="text-gray-600">Manage user accounts and permissions</p>
+                    </div>
+                </div>
+            </a> -->
 
+            <!-- Analytics -->
+            <!-- <a href="/admin/analytics" class="admin-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-200 group">
+                <div class="flex items-center space-x-4">
+                    <div class="admin-card-icon bg-red-100 p-4 rounded-lg transition-all duration-300">
+                        <i class="fas fa-chart-line text-3xl text-red-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">Business Analytics</h2>
+                        <p class="text-gray-600">View sales and performance metrics</p>
+                    </div>
+                </div>
+            </a> -->
+        </div>
 
+        <!-- Quick Action Footer -->
+        <div class="mt-8 border-t pt-6 flex justify-end">
+            <div class="flex space-x-4">
+                <!-- <a href="/admin/settings" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-cog mr-2"></i>Settings
+                </a> -->
+                <form action="/logout" method="POST">
+                    <button type="submit" class="text-red-600 hover:text-red-800">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <%- include("../partials/_footer") %>
 
+    <script>
+        // // Mobile menu toggle
+        // const hamburgerMenuButton = document.getElementById("hamburger-menu");
+        // const mobileMenu = document.getElementById("mobile-menu");
 
+        // hamburgerMenuButton.addEventListener("click", function() {
+        //     mobileMenu.classList.toggle("open");
+        //     hamburgerMenuButton.classList.toggle("active");
+        // });
+    </script>
 </body>
 </html>
