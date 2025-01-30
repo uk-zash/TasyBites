@@ -1,109 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="New Tasty Bites - Delicious food in Mahul, India" />
-    <meta name="keywords" content="New Tasty Bites, fast food, burgers, pizza, Mahul, food delivery" />
-    <meta property="og:title" content="<%= title %> | New Tasty Bites" />
-    <meta property="og:description" content="Enjoy the best food at New Tasty Bites." />
-    <meta property="og:image" content="/images/og-image.jpg" />
-    <meta charset="UTF-8" />
-    <title><%= title %> - New Tasty Bites</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= product.description %>">
+    <title><%= product.name %> - New Tasty Bites</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/card.css">
-    <link rel="stylesheet" href="/css/menu.css">
     <style>
-      
+        /* Product Page Styles */
+        .product-container {
+            max-width: 1280px;
+            margin: 5rem auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Product Image */
+        .product-image-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* Product Info */
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0rem;
+        }
+
+        .product-price {
+            font-size: 1.75rem;
+            color: #065f46;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Add to Cart Button */
+        .add-to-cart-btn {
+            background: #065f46;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            width: 100%;
+            max-width: 300px;
+            transition: background 0.2s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #054d3a;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            margin-top: 3rem;
+        }
+
+        .reviews-heading {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        /* Review Card */
+        .review-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: #1f2937;
+            margin-right: 1rem;
+        }
+
+        .review-date {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .review-text {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* Review Form */
+        .review-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+
+        .form-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #1f2937;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            border-color: #065f46;
+            outline: none;
+        }
+
+        .submit-btn {
+            background: #065f46;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #054d3a;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 480px) {
+            .product-title {
+                font-size: 1.5rem;
+            }
+
+            .product-price {
+                font-size: 1.5rem;
+            }
+
+            .review-form {
+                padding: 1rem;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <%- include('../partials/_navbar') %>
     <%- include('../partials/_flash_messages') %>
 
-
-    <div class="mx-auto px-1 md:px-4 mt-20 md:mt-20">
-
-        <div class="container mx-auto px-4 mt-16">
-          <!-- Product Details -->
-          <div class="flex flex-col md:flex-row items-start md:items-center mb-8">
+    <main class="product-container">
+        <div class="product-grid">
             <!-- Product Image -->
-            <div class="w-full md:w-1/2">
-              <img src="<%= product.imageURL %>" alt="<%= product.name %>" class="w-full h-auto rounded">
+            <div class="product-image-container">
+                <img src="<%= product.imageURL %>" alt="<%= product.name %>" class="product-image">
             </div>
+
             <!-- Product Info -->
-            <div class="w-full md:w-1/2 md:pl-8 mt-6 md:mt-0">
-              <h1 class="text-3xl font-semibold mb-4"><%= product.name %></h1>
-              <p class="text-xl text-red-500 font-bold mb-2">₹<%= product.price %></p>
-              <p class="text-gray-700 mb-4"><%= product.description %></p>
-              <!-- Add to Cart Form -->
-              <form action="/add-to-cart" method="POST">
-                <input type="hidden" name="id" value="<%= product.id %>">
-                <button type="submit" class="bg-green-500 text-white py-2 px-6 rounded hover:bg-green-600">
-                  Add to Cart
-                </button>
-              </form>
+            <div class="product-info">
+                <h1 class="product-title"><%= product.name %></h1>
+                <p class="product-price">₹<%= product.price %></p>
+                <p class="product-description"><%= product.description %></p>
+                
+                <!-- Add to Cart Form -->
+                <form action="/add-to-cart" method="POST">
+                    <input type="hidden" name="id" value="<%= product.id %>">
+                    <button type="submit" class="add-to-cart-btn">
+                        Add to Cart
+                    </button>
+                </form>
             </div>
-          </div>
-        
-          <!-- Reviews Section -->
-          <div class="mt-8">
-            <!-- Flash Messages -->
-            
-        
-            <h2 class="text-2xl font-semibold mb-4">Customer Reviews</h2>
-        
-            <!-- Display Approved Reviews -->
-            <% if (reviews && reviews.length > 0) { %>
-              <% reviews.forEach(function(review) { %>
-                <div class="border rounded p-4 mb-4">
-                  <p class="font-semibold"><%= review.name %></p>
-                  <p class="text-sm text-gray-600"><%= new Date(review.timestamp.toDate()).toLocaleDateString() %></p>
-                  <p class="mt-2"><%= review.reviewText %></p>
-                </div>
-              <% }); %>
-            <% } else { %>
-              <p>No reviews yet. Be the first to review this product!</p>
-            <% } %>
-        
-            <!-- Review Submission Form -->
-            <div class="mt-6">
-              <h3 class="text-xl font-semibold mb-4">Write a Review</h3>
-              <form action="/product/<%= product.id %>/review" method="POST">
-                <div class="mb-4">
-                  <label class="block text-gray-700">Name</label>
-                  <input type="text" name="name" class="w-full border border-gray-300 rounded px-3 py-2" required>
-                </div>
-                <div class="mb-4">
-                  <label class="block text-gray-700">Email</label>
-                  <input type="email" name="email" class="w-full border border-gray-300 rounded px-3 py-2" required>
-                </div>
-                <div class="mb-4">
-                  <label class="block text-gray-700">Your Review</label>
-                  <textarea name="reviewText" rows="4" class="w-full border border-gray-300 rounded px-3 py-2" required></textarea>
-                </div>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600">
-                  Submit Review
-                </button>
-              </form>
-            </div>
-          </div>
         </div>
 
-    </div>
+        <!-- Reviews Section -->
+        <section class="reviews-section">
+            <h2 class="reviews-heading">Customer Reviews</h2>
+
+            <% if (reviews && reviews.length > 0) { %>
+                <% reviews.forEach(function(review) { %>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-author"><%= review.name %></span>
+                            <span class="review-date">
+                                <%= new Date(review.timestamp.toDate()).toLocaleDateString('en-IN', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                }) %>
+                            </span>
+                        </div>
+                        <p class="review-text"><%= review.reviewText %></p>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="review-card">
+                    <p class="review-text">No reviews yet. Be the first to share your experience!</p>
+                </div>
+            <% } %>
+
+            <!-- Review Form -->
+            <div class="review-form">
+                <h3 class="form-heading">Write a Review</h3>
+                <form action="/product/<%= product.id %>/review" method="POST">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Your Review</label>
+                        <textarea name="reviewText" rows="4" class="form-input" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
 
     <%- include("../partials/_footer") %>
 
     <script>
-      // Get elements
-      const hamburgerMenuButton = document.getElementById("hamburger-menu");
-      const mobileMenu = document.getElementById("mobile-menu");
-
-      // Toggle menu visibility on hamburger click
-      hamburgerMenuButton.addEventListener("click", function() {
-        mobileMenu.classList.toggle("open"); // Show or hide the mobile menu
-        hamburgerMenuButton.classList.toggle("active"); // Toggle hamburger to cross and vice versa
-      });
+        // Mobile menu toggle
+        document.getElementById('hamburger-menu').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('mobile-menu').classList.toggle('open');
+        });
     </script>
-  </body>
+</body>
 </html>
