@@ -26,6 +26,11 @@ body {
   padding: 15px;
 }
 
+/* Left Side (Logo) */
+.navbar-left {
+  flex: 1;
+}
+
 .logo {
   font-size: 24px;
   font-weight: bold;
@@ -33,8 +38,14 @@ body {
   text-decoration: none;
 }
 
+/* Center (Navigation Links) */
+.navbar-center {
+  flex: 2;
+}
+
 .navbar-links {
   display: flex;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -46,7 +57,7 @@ body {
   transition: color 0.3s;
 }
 
-.navbar-links a:hover:not(:last-child) {
+.navbar-links a:hover {
   color: orange;
 }
 
@@ -63,9 +74,53 @@ body {
   background-color: #e55347;
 }
 
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.search-input {
+  width: 200px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px 0 0 20px;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-button {
+  background-color: #ff6347;
+  border: none;
+  padding: 9px 10px;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+}
+
+.search-button .search-icon {
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+}
+
+.search-button:hover {
+  background-color: #e55347;
+}
+
+.call-now span {
+  color: white;
+  font-size: 0.9rem;
+}
+
+/* Right Side (Cart Icon and Hamburger) */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
 .cart {
   position: relative;
-  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .cart-icon {
@@ -73,12 +128,17 @@ body {
   height: 24px;
   fill: none;
   stroke: currentColor;
+  transition: stroke 0.3s;
+}
+
+.cart:hover .cart-icon {
+  stroke: #ff6347;
 }
 
 .cart-badge {
   position: absolute;
   top: -8px;
-  right: -8px;
+  right: -10px;
   background-color: #ff6347;
   color: white;
   border-radius: 50%;
@@ -90,9 +150,8 @@ body {
   justify-content: center;
 }
 
-/* Hamburger Menu */
 .hamburger-container {
-  display: none;
+  display: none; /* Shown on mobile via media query */
 }
 
 .hamburger {
@@ -106,6 +165,11 @@ body {
   width: 30px;
   height: 30px;
   stroke: #333;
+}
+
+.hamburger:hover .hamburger-icon,
+.hamburger:hover .close-icon {
+  stroke: #ff6347;
 }
 
 .close-icon {
@@ -142,51 +206,36 @@ body {
 }
 
 .mobile-menu a:hover {
-  color: #ff6347;
+  color: black;
 }
 
-/* Search Form */
-.search-form,
-.search-form-mobile {
+/* Mobile Menu Search */
+.mobile-menu .search-form-mobile {
   display: flex;
   align-items: center;
-  margin-left: 15px;
+  margin-bottom: 15px;
 }
 
-.search-input {
-  width: 200px;
-  padding: 6px 12px;
+.mobile-menu .search-input {
+  width: 100%;
+  padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 20px 0 0 20px;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
 }
 
-.search-button {
-  background-color: #ff6347;
-  border: none;
-  padding: 9px 10px;
-  border-radius: 0 20px 20px 0;
-  cursor: pointer;
+.mobile-menu .search-button {
+  padding: 13px 10px;
 }
 
-.search-button .search-icon {
-  width: 16px;
-  height: 16px;
-  stroke: #fff;
-}
-
-.search-button:hover {
-  background-color: #e55347;
-}
-
-.call-now span{
-  color: white;
+.call-now {
+  border-radius: 12px;
 }
 
 /* Adjustments for mobile view */
 @media (max-width: 768px) {
-  .navbar-links {
+  .navbar-center {
     display: none;
   }
 
@@ -198,35 +247,11 @@ body {
     display: none;
   }
 
-  /* Mobile Menu Search */
-  .mobile-menu .search-form-mobile {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+  .navbar-right {
+    margin-left: auto;
   }
 
-  .mobile-menu .search-input {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 20px 0px 0px 20px;
-    outline: none;
-    font-size: 16px;
-  }
-
-  .mobile-menu .search-button {
-    display: inline-block;
-  }
-
-  .search-button{
-    padding: 13px 10px;
-  }
-
-  .call-now{
-    border-radius: 12px;
-  }
-
-  .cart-badge {
-    right: 150px;
+  .cart {
+    margin-right: 30px;
   }
 }
