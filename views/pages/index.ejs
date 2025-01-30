@@ -1,159 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="New Tasty Bites - Delicious food in Mahul, India" />
-    <meta name="keywords" content="New Tasty Bites, fast food, burgers, pizza, Mahul, food delivery" />
-    <meta property="og:title" content="<%= title %> | New Tasty Bites" />
-    <meta property="og:description" content="Enjoy the best food at New Tasty Bites." />
-    <meta property="og:image" content="/images/og-image.jpg" />
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="New Tasty Bites - Best burgers, pizzas, and fast food in Mahul, Azamgarh. Enjoy delicious meals with quick delivery near Phoolpur and Ambari.">
+    <meta name="keywords" content="burgers Mahul, pizza Azamgarh, fast food Phoolpur, ambari restaurant, tasty bites azamgarh">
     <title><%= title %> - New Tasty Bites</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/card.css">
-    <link rel="stylesheet" href="/css/menu.css">
     <style>
-      /* Banner Container */
-      .banner {
-        height: 200px;
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-      }
+        /* Enhanced Responsive Design */
+        .container {
+            max-width: 1280px;
+            margin: 5rem auto;
+            padding: 0 15px;
+        }
 
-      /* For image banners */
-      .banner img {
-        object-fit: cover;
-        width: 100%;
-        height: 50%;
-        object-position: center;
-      }
 
-      /* For text banners */
-      .banner-text {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        background-color: #fbbf24; /* Light yellow background */
-        text-align: center;
-        padding: 10px;
-        font-size: 1.5rem; /* Default font size */
-        font-weight: 700;
-        color: #333;
-        position: relative;
-        flex-direction: row; /* Align text horizontally */
-        white-space: nowrap; /* Prevent text from wrapping */
-        overflow: hidden; /* Ensure content doesn't overflow */
-        text-overflow: ellipsis; /* Add ellipsis for overflow text */
-      }
 
-      /* Custom Style for Percentages */
-      .highlight-percent {
-  color: #f56565; /* Red color for percentage */
-  font-weight: bold;
-  font-style: italic; /* Make percentage text italic */
-  text-decoration: underline; /* Underline percentage */
-}
+        /* Category Filter */
+        .category-filter {
+            margin: 25px 0;
+        }
 
-/* Custom Style for Rupee Amounts */
-.highlight-rupee {
-  color: #48bb78; /* Green color for rupee amounts */
-  font-weight: bold;
-  font-style: normal; /* You can make rupee values normal or bold */
-  text-decoration: none; /* Optional: Remove any underline from rupee values */
-}
+        select {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: url('/images/arrow-down.svg') no-repeat right 15px center;
+            background-size: 16px;
+        }
 
-      /* Call-to-Action Button */
-      .cta-button {
-        background-color: #ffffff;
-        color: #fbbf24;
-        padding: 10px 20px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 15px;
-        transition: background-color 0.3s;
-      }
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
 
-      .cta-button:hover {
-        background-color: #fbbf24;
-        color: #ffffff;
-      }
-      /* Responsive Text for Small Screens */
-      @media (max-width: 768px) {
-        .banner-text {
-          font-size: 1.25rem;
-          white-space: nowrap; /* Smaller font on mobile */
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+            }
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #065f46;
+            margin: 12px 0;
+        }
+
+        .add-to-cart-button {
+            width: 100%;
+            padding: 12px;
+            background: #065f46;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .add-to-cart-button:hover {
+            background: #064e3b;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 480px) {
+            .product-grid {
+                gap: 12px;
+            }
+
+            .product-image {
+                height: 150px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .product-name {
+                font-size: 0.9rem;
+            }
+
+            .product-price {
+                font-size: 1.1rem;
+                margin: 8px 0;
+            }
+
+            .add-to-cart-button {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Section Headings */
+        .section-heading {
+            text-align: center;
+            font-size: 1.75rem;
+            margin: 35px 0 25px;
+            color: #1f2937;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-heading:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #065f46;
+            margin: 10px auto 0;
         }
 
         .banner {
-          height: auto;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .banner-text {
-          font-size: 0.95rem; /* Even smaller font size on smaller screens */
-        }
-      }
-
-      /* In your CSS file */
-/* Style the select dropdown */
-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: white; /* Background color for the dropdown */
-  background-image: url('/images/arrow-down.svg'); /* Custom arrow image */
-  background-repeat: no-repeat;
-  background-position: right 10px center; /* Position the arrow */
-  background-size: 16px;
-  padding: 12px 40px 12px 12px; /* Add padding to make room for the arrow */
-  border: 1px solid #d1d5db; /* Border color */
-  border-radius: 0.375rem; /* Rounded corners */
-  font-size: 1rem;
-  color: #333; /* Text color */
-  width: 100%; /* Make the dropdown full-width */
-  transition: all 0.3s ease; /* Smooth transition on hover/focus */
-}
-
-/* Hover and Focus styles */
-select:hover,
-select:focus {
-  border-color: #4CAF50; /* Border color on hover/focus */
-  outline: none; /* Remove default outline on focus */
-}
-
-/* Styling for the dropdown arrow (customize if you have your own icon) */
-select::-ms-expand {
-  display: none; /* Remove default arrow on IE */
-}
-
-/* For smaller screens */
-@media (max-width: 768px) {
-  select {
-    font-size: 0.9rem; /* Slightly smaller font size on smaller screens */
-    padding: 10px 35px 10px 10px; /* Adjust padding for smaller screens */
+    height: 200px; /* Smaller height for the banner */
+    position: relative;
+    width: 100%;
+    overflow: hidden;
   }
-}
+
+  /* For image banners */
+  .banner img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    object-position: center;
+  }
+
+  /* For text banners */
+  .banner-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #fbbf24; /* Light yellow background for text banner */
+    text-align: center;
+    padding: 10px;
+    font-size: 1.5rem; /* Default font size */
+    font-weight: 700;
+    color: #333;
+  }
+
+
+  /* Responsive Text for Small Screens */
+  @media (max-width: 768px) {
+    .banner-text {
+      font-size: 1.25rem; /* Smaller font on mobile */
+    }
+
+    .banner {
+      height: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .banner-text {
+      font-size: 1rem; /* Even smaller font size on smaller screens */
+    }
+  }
 
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <%- include('../partials/_navbar') %>
     <%- include('../partials/_flash_messages') %>
 
-
-    <div class="mx-auto px-1 md:px-4 mt-20 md:mt-20">
-
-     
-    
-    <!-- Promotional Banner -->
+    <main class="container">
+        <!-- Promotional Banner -->
+        <!-- Promotional Banner -->
     <% if (bannerImageURL && bannerImageURL !== '') { %>
       <div class="banner">
         <img src="<%= bannerImageURL %>" alt="Promotional Banner" />
@@ -168,91 +234,85 @@ select::-ms-expand {
       <div class="mt-16"></div>
     <% } %>
 
-    <div class="container mx-auto mt-6 px-4">
-      <form action="/menu" method="GET" class="mb-4">
-        <label for="category" class="block text-gray-700 font-semibold mb-2">Filter by Category:</label>
-        <select name="category" id="category" class="w-full md:w-1/3 border border-gray-300 rounded px-3 py-2" onchange="this.form.submit()">
-          <option value="" <%= (!selectedCategory || selectedCategory === '') ? 'selected' : '' %>>All Categories</option>
-          <% categories.forEach(function(category) { %>
-            <option value="<%= category %>" <%= (selectedCategory === category) ? 'selected' : '' %>><%= category %></option>
-          <% }); %>
-        </select>
-      </form>
-    </div>
-    
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <form action="/menu" method="GET">
+                <select name="category" onchange="this.form.submit()">
+                    <option value="" <%= !selectedCategory ? 'selected' : '' %>>All Categories</option>
+                    <% categories.forEach(category => { %>
+                    <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>>
+                        <%= category %>
+                    </option>
+                    <% }) %>
+                </select>
+            </form>
+        </div>
 
-      <!-- Popular Items Section -->
-      <section class="container mt-12 mx-auto px-1 lg:px-4 ">
-        <h2 class="text-2xl font-semibold mb-4 text-center">Popular Items</h2>
-        <% if (popularItems && popularItems.length > 0) { %>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-            <% popularItems.forEach(function(item) { %>
-              <div class="item-card">
+        <!-- Popular Items -->
+        <h2 class="section-heading">Popular Items</h2>
+        <div class="product-grid">
+            <% popularItems.forEach(item => { %>
+            <div class="product-card">
                 <a href="/product/<%= item.id %>">
-                  <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="item-image">
+                    <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
                 </a>
-                <div class="item-info">
-                  <h3 class="item-name"><%= item.name %></h3>
-                  <p class="item-description"><%= item.description %></p>
-                  <p class="item-price">₹<%= item.price %></p>
-                  <form action="/add-to-cart" method="POST" class="item-form">
-                    <input type="hidden" name="id" value="<%= item.id %>">
-                    <button type="submit" class="add-to-cart-button">
-                      Add to Cart
-                    </button>
-                  </form>
+                <div class="product-info">
+                    <h3 class="product-name"><%= item.name %></h3>
+                    <p class="product-description"><%= item.description %></p>
+                    <p class="product-price">₹<%= item.price %></p>
+                    <form action="/add-to-cart" method="POST">
+                        <input type="hidden" name="id" value="<%= item.id %>">
+                        <button type="submit" class="add-to-cart-button">
+                            Add to Cart
+                        </button>
+                    </form>
                 </div>
-              </div>
-            <% }); %>
-          </div>
-        <% } else { %>
-          <p>No popular items available at the moment.</p>
-        <% } %>
-      </section>
+            </div>
+            <% }) %>
+        </div>
 
-      <!-- Most Viewed Items Section -->
-      <section class="container mx-auto px-1 lg:px-4 mt-12">
-        <h2 class="text-2xl font-semibold mb-4 text-center">Most Viewed Items</h2>
-        <% if (mostViewedItems && mostViewedItems.length > 0) { %>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <% mostViewedItems.forEach(function(item) { %>
-              <div class="item-card">
+        <!-- Most Viewed Items -->
+        <h2 class="section-heading">Most Viewed</h2>
+        <div class="product-grid">
+            <% mostViewedItems.forEach(item => { %>
+            <div class="product-card">
                 <a href="/product/<%= item.id %>">
-                  <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="item-image">
+                    <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
                 </a>
-                <div class="item-info">
-                  <h3 class="item-name"><%= item.name %></h3>
-                  <p class="item-description"><%= item.description %></p>
-                  <p class="item-price">₹<%= item.price %></p>
-                  <form action="/add-to-cart" method="POST" class="item-form">
-                    <input type="hidden" name="id" value="<%= item.id %>">
-                    <button type="submit" class="add-to-cart-button">
-                      Add to Cart
-                    </button>
-                  </form>
+                <div class="product-info">
+                    <h3 class="product-name"><%= item.name %></h3>
+                    <p class="product-description"><%= item.description %></p>
+                    <p class="product-price">₹<%= item.price %></p>
+                    <form action="/add-to-cart" method="POST">
+                        <input type="hidden" name="id" value="<%= item.id %>">
+                        <button type="submit" class="add-to-cart-button">
+                            Add to Cart
+                        </button>
+                    </form>
                 </div>
-              </div>
-            <% }); %>
-          </div>
-        <% } else { %>
-          <p>No items available at the moment.</p>
-        <% } %>
-      </section>
-
-    </div>
+            </div>
+            <% }) %>
+        </div>
+    </main>
 
     <%- include("../partials/_footer") %>
 
     <script>
-      // Get elements
-      const hamburgerMenuButton = document.getElementById("hamburger-menu");
-      const mobileMenu = document.getElementById("mobile-menu");
+        // Mobile menu toggle
+        // document.getElementById('hamburger-menu').addEventListener('click', function() {
+        //     this.classList.toggle('active');
+        //     document.getElementById('mobile-menu').classList.toggle('open');
+        // });
 
-      // Toggle menu visibility on hamburger click
-      hamburgerMenuButton.addEventListener("click", function() {
-        mobileMenu.classList.toggle("open"); // Show or hide the mobile menu
-        hamburgerMenuButton.classList.toggle("active"); // Toggle hamburger to cross and vice versa
-      });
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
-  </body>
+</body>
 </html>
