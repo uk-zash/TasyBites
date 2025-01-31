@@ -61,17 +61,18 @@ body {
   color: orange;
 }
 
-.call-now {
+.btnn .call-now {
   font-weight: bold;
-  background-color: #ff6347;
-  color: white;
+  background-color: #3b82f6;
+  /* color: white; */
   padding: 10px 20px;
   border-radius: 30px;
+  font-size: 16px;
   transition: background-color 0.3s ease;
 }
 
-.call-now:hover {
-  background-color: #e55347;
+.btnn .call-now:hover {
+  background-color: #246adc;
 }
 
 .search-form {
@@ -90,10 +91,10 @@ body {
 }
 
 .search-button {
-  background-color: #ff6347;
+  background-color:  #3b82f6;
   border: none;
   padding: 9px 10px;
-  border-radius: 0 20px 20px 0;
+  border-radius: 0 10px 10px 0;
   cursor: pointer;
 }
 
@@ -104,12 +105,12 @@ body {
 }
 
 .search-button:hover {
-  background-color: #e55347;
+  background-color: #246adc;
 }
 
 .call-now span {
   color: white;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 /* Right Side (Cart Icon and Hamburger) */
@@ -179,7 +180,7 @@ body {
 /* Mobile Menu */
 .mobile-menu {
   position: fixed;
-  top: 60px;
+  top: 66px;
   right: 0;
   width: 250px;
   background-color: white;
@@ -199,15 +200,17 @@ body {
 .mobile-menu a {
   display: block;
   text-decoration: none;
-  color: #333;
+  /* color: #333; */
   margin: 15px 20px;
   font-size: 18px;
   transition: color 0.3s;
 }
 
-.mobile-menu a:hover {
-  color: black;
+.btnn{
+  text-align: center;
 }
+
+
 
 /* Mobile Menu Search */
 .mobile-menu .search-form-mobile {
@@ -231,6 +234,7 @@ body {
 
 .call-now {
   border-radius: 12px;
+  color: white;
 }
 
 /* Adjustments for mobile view */

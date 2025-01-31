@@ -7,6 +7,8 @@
     <title><%= product.name %> - New Tasty Bites</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Product Page Styles */
         .product-container {
@@ -56,7 +58,7 @@
 
         .product-price {
             font-size: 1.75rem;
-            color: #065f46;
+            color: #ff5200;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
@@ -69,7 +71,6 @@
 
         /* Add to Cart Button */
         .add-to-cart-btn {
-            background: #065f46;
             color: white;
             padding: 1rem 2rem;
             border-radius: 8px;
@@ -80,7 +81,7 @@
         }
 
         .add-to-cart-btn:hover {
-            background: #054d3a;
+            background: #246adc;
         }
 
         /* Reviews Section */
@@ -110,6 +111,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
+            gap: 1rem;
         }
 
         .review-author {
@@ -163,12 +165,11 @@
         }
 
         .form-input:focus {
-            border-color: #065f46;
+            border-color: #246adc;
             outline: none;
         }
 
         .submit-btn {
-            background: #065f46;
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 6px;
@@ -177,7 +178,7 @@
         }
 
         .submit-btn:hover {
-            background: #054d3a;
+            background: #246adc;
         }
 
         /* Mobile Optimizations */
@@ -216,7 +217,7 @@
                 <!-- Add to Cart Form -->
                 <form action="/add-to-cart" method="POST">
                     <input type="hidden" name="id" value="<%= product.id %>">
-                    <button type="submit" class="add-to-cart-btn">
+                    <button type="submit" class="add-to-cart-btn bg-blue-500 hover:bg-blue-600">
                         Add to Cart
                     </button>
                 </form>
@@ -230,15 +231,23 @@
             <% if (reviews && reviews.length > 0) { %>
                 <% reviews.forEach(function(review) { %>
                     <div class="review-card">
+                        <!-- Reviewer Header with Dummy Profile -->
                         <div class="review-header">
-                            <span class="review-author"><%= review.name %></span>
-                            <span class="review-date">
-                                <%= new Date(review.timestamp.toDate()).toLocaleDateString('en-IN', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                }) %>
-                            </span>
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                    <i class="fas fa-user text-gray-500"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="review-author"><%= review.name %></p>
+                                <p class="review-date">
+                                    <%= new Date(review.timestamp.toDate()).toLocaleDateString('en-IN', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    }) %>
+                                </p>
+                            </div>
                         </div>
                         <p class="review-text"><%= review.reviewText %></p>
                     </div>
@@ -268,7 +277,7 @@
                         <textarea name="reviewText" rows="4" class="form-input" required></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-btn">
+                    <button type="submit" class="submit-btn bg-blue-500 hover:bg-blue-600">
                         Submit Review
                     </button>
                 </form>

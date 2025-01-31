@@ -7,6 +7,7 @@
     <title><%= title %> - New Tasty Bites</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/menu.css">
     <style>
         /* Enhanced Menu Styles */
         .menu-container {
@@ -91,25 +92,25 @@
         .item-description {
             font-size: 0.875rem;
             color: #6b7280;
-            height: 40px;
+            height: 25px;
+            white-space: nowrap;
             overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
             margin-bottom: 0.75rem;
         }
 
         .item-price {
             font-size: 1.25rem;
-            font-weight: 700;
-            color: #065f46;
+            /* font-weight: 700; */
+            /* color: #065f46; */
             margin: 0.5rem 0;
+            color: #ff5200;
         }
 
         .add-to-cart-btn {
             width: 100%;
             padding: 0.75rem;
-            background: #065f46;
+            /* background: #065f46; */
             color: white;
             border: none;
             border-radius: 8px;
@@ -119,7 +120,7 @@
         }
 
         .add-to-cart-btn:hover {
-            background: #054d3a;
+            /* background: #054d3a; */
         }
 
         /* Section Headings */
@@ -137,7 +138,7 @@
             display: block;
             width: 50px;
             height: 3px;
-            background: #065f46;
+            background: #4b8ec8;
             margin: 0.5rem auto 0;
         }
 
@@ -149,7 +150,7 @@
 
         .view-more-btn {
             padding: 0.75rem 2rem;
-            background: #065f46;
+            /* background: #065f46; */
             color: white;
             border-radius: 8px;
             font-weight: 600;
@@ -157,7 +158,7 @@
         }
 
         .view-more-btn:hover {
-            background: #054d3a;
+            /* background: #054d3a; */
         }
 
         /* Mobile Optimizations */
@@ -247,20 +248,22 @@
 
     <main class="menu-container">
         <!-- Promotional Banner -->
-        <% if (bannerImageURL && bannerImageURL !== '') { %>
-          <div class="banner">
-            <img src="<%= bannerImageURL %>" alt="Promotional Banner" />
-          </div>
-        <% } else if (bannerContent && bannerContent !== '') { %>
-          <div class="banner">
-            <div class="banner-text">
-              <p><%= bannerContent %></p>
-            </div>
-          </div>
-        <% } else { %>
-          <div class="mt-16"></div>
-        <% } %>
-    
+        <div class="mb-8">
+            <% if (bannerImageURL && bannerImageURL !== '') { %>
+                <div class="banner-preview bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="<%= bannerImageURL %>" alt="Promotional Banner" class="w-full h-24 object-cover">
+                </div>
+            <% } else if (bannerContent && bannerContent !== '') { %>
+                <div class="banner-preview bg-yellow-100 rounded-xl p-6 text-center">
+                    <p class="text-xl font-semibold text-yellow-800"><%= bannerContent %></p>
+                </div>
+            <% } else { %>
+                <!-- <div class="bg-gray-100 rounded-xl p-6 text-center">
+                    <i class="fas fa-image text-4xl text-gray-300 mb-3"></i>
+                    <p class="text-gray-600">No promotional banner is currently set</p>
+                </div> -->
+            <% } %>
+        </div>
 
         <!-- Category Filter -->
         <div class="category-filter">
@@ -295,7 +298,7 @@
                                     <p class="item-price">₹<%= item.price %></p>
                                     <form action="/add-to-cart" method="POST">
                                         <input type="hidden" name="id" value="<%= item.id %>">
-                                        <button type="submit" class="add-to-cart-btn">
+                                        <button type="submit" class="add-to-cart-btn bg-blue-500 hover:bg-blue-600">
                                             Add to Cart
                                         </button>
                                     </form>
@@ -308,7 +311,7 @@
                         <div class="view-more">
                             <form action="/menu" method="GET">
                                 <input type="hidden" name="category" value="<%= category %>">
-                                <button type="submit" class="view-more-btn">
+                                <button type="submit" class="view-more-btn bg-blue-600 hover:bg-blue-700">
                                     View More <%= category %>
                                 </button>
                             </form>
@@ -328,7 +331,7 @@
                                 <p class="item-price">₹<%= item.price %></p>
                                 <form action="/add-to-cart" method="POST">
                                     <input type="hidden" name="id" value="<%= item.id %>">
-                                    <button type="submit" class="add-to-cart-btn">
+                                    <button type="submit" class="add-to-cart-btn bg-blue-500 hover:bg-blue-600">
                                         Add to Cart
                                     </button>
                                 </form>

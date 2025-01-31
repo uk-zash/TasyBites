@@ -2,6 +2,7 @@
 const { db } = require('../config/firebase');
 const { getCategories } = require('../utils/getCategories');
 
+
 exports.getHomePage = async (req, res) => {
   const selectedCategory = req.query.category;
   try {
@@ -20,9 +21,25 @@ exports.getHomePage = async (req, res) => {
       .where('popular', '==', true)
       .get();
     const popularItems = [];
-    popularItemsSnapshot.forEach((doc) => {
-      popularItems.push({ id: doc.id, ...doc.data() });
-    });
+    for (const doc of popularItemsSnapshot.docs) {
+      const item = { id: doc.id, ...doc.data() };
+
+      // Fetch reviews for this product
+      const reviewsSnapshot = await db
+        .collection('Reviews')
+        .where('productId', '==', doc.id)
+        .where('approved', '==', true)
+        .get();
+      
+      let totalRating = 0;
+      reviewsSnapshot.forEach(reviewDoc => {
+        totalRating += reviewDoc.data().rating || 0;
+      });
+
+      // Calculate average rating
+      item.averageRating = reviewsSnapshot.size > 0 ? (totalRating / reviewsSnapshot.size).toFixed(1) : null;
+      popularItems.push(item);
+    }
 
     // Fetch most viewed items
     const mostViewedItemsSnapshot = await db
@@ -31,9 +48,25 @@ exports.getHomePage = async (req, res) => {
       .limit(6)
       .get();
     const mostViewedItems = [];
-    mostViewedItemsSnapshot.forEach((doc) => {
-      mostViewedItems.push({ id: doc.id, ...doc.data() });
-    });
+    for (const doc of mostViewedItemsSnapshot.docs) {
+      const item = { id: doc.id, ...doc.data() };
+
+      // Fetch reviews for this product
+      const reviewsSnapshot = await db
+        .collection('Reviews')
+        .where('productId', '==', doc.id)
+        .where('approved', '==', true)
+        .get();
+      
+      let totalRating = 0;
+      reviewsSnapshot.forEach(reviewDoc => {
+        totalRating += reviewDoc.data().rating || 0;
+      });
+
+      // Calculate average rating
+      item.averageRating = reviewsSnapshot.size > 0 ? (totalRating / reviewsSnapshot.size).toFixed(1) : null;
+      mostViewedItems.push(item);
+    }
 
     const categories = await getCategories();
 

@@ -19,14 +19,16 @@ exports.getReviewsPage = async (req, res) => {
   }
 };
 
+
 exports.submitReview = async (req, res) => {
-  const { name, email, reviewText } = req.body;
+  const { name, email, reviewText, rating } = req.body;
 
   try {
     await db.collection('Reviews').add({
       name,
       email,
       reviewText,
+      rating: parseInt(rating, 10), // Ensure rating is a number
       approved: false, // Admin needs to approve
     });
 

@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/menu.css">
     <style>
         /* Improved toggle styles */
 .toggle-checkbox:checked {
@@ -42,6 +43,8 @@
 <body class="bg-gray-50">
 
     <%- include('../partials/_navbar') %>
+    <%- include('../partials/_flash_messages') %>
+
 
     <main class="container mx-auto px-4 py-8 max-w-2xl mt-16">
         <!-- Page Header -->
@@ -54,23 +57,6 @@
             </nav>
         </div>
 
-         <!-- Messages -->
-         <% if (success_messages && success_messages.length > 0) { %>
-          <% success_messages.forEach(function(message) { %>
-              <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6 rounded-lg flex items-center">
-                  <i class="fas fa-check-circle text-green-400 mr-3"></i>
-                  <p class="text-green-700"><%= message %></p>
-              </div>
-          <% }); %>
-      <% } %>
-      <% if (error_messages && error_messages.length > 0) { %>
-          <% error_messages.forEach(function(message) { %>
-              <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6 rounded-lg flex items-center">
-                  <i class="fas fa-exclamation-circle text-red-400 mr-3"></i>
-                  <p class="text-red-700"><%= message %></p>
-              </div>
-          <% }); %>
-      <% } %>
 
     <!-- Updated Form Container -->
     <div class="bg-white rounded-xl shadow-md p-6">

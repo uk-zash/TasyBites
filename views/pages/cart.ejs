@@ -6,6 +6,7 @@
     <title><%= title %> - New Tasty Bites</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/menu.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
     <style>
@@ -19,7 +20,7 @@
     <%- include('../partials/_navbar') %>
 
     <main class="container mx-auto px-4 py-8 max-w-7xl mt-20">
-        <h1 class="text-3xl font-bold text-gray-800 mb-8">Your Shopping Cart</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Your Shopping Cart</h1>
         <%- include('../partials/_flash_messages') %>
 
         <% if (cart && cart.totalQty > 0) { %>
@@ -79,7 +80,7 @@
                 </div>
 
                 <!-- Order Summary -->
-                <div class="bg-white rounded-xl cart-item-shadow p-6 h-fit sticky top-8 mt-20">
+                <div class="bg-white rounded-xl cart-item-shadow p-6 h-fit sticky top-8 mt-4">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Order Summary</h2>
                     
                     <div class="space-y-4 mb-8">

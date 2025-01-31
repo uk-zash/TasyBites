@@ -6,6 +6,7 @@
     <title><%= title %> - New Tasty Bites</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/menu.css">
     <style>
         /* Search Page Styles */
         .search-container {
@@ -34,8 +35,8 @@
         /* Search Results Grid */
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
         }
 
         @media (min-width: 640px) {
@@ -71,42 +72,41 @@
         }
 
         .product-details {
-            padding: 1.5rem;
+            padding: 0.5rem;
+           
         }
 
         .product-name {
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 0.5rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
+            display: block;
+            white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .product-description {
             color: #6b7280;
             font-size: 0.875rem;
-            line-height: 1.5;
             margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .product-price {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #065f46;
+            /* font-weight: 700; */
+            color: #ff5200;
             margin-bottom: 1rem;
         }
 
         .add-to-cart-btn {
             width: 100%;
             padding: 0.75rem;
-            background: #065f46;
+            background: #3b82f6;
             color: white;
             border: none;
             border-radius: 8px;
@@ -116,7 +116,7 @@
         }
 
         .add-to-cart-btn:hover {
-            background: #054d3a;
+            background: #246adc;
         }
 
         /* No Results Message */
