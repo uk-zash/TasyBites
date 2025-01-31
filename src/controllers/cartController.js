@@ -1,6 +1,7 @@
 const { db } = require('../config/firebase');
 
 exports.addToCart = async (req, res) => {
+  console.log("Add to Cart Request Received");
   const itemId = req.body.id;
 
   try {
