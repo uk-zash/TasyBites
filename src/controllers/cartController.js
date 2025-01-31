@@ -1,7 +1,6 @@
 const { db } = require('../config/firebase');
 
 exports.addToCart = async (req, res) => {
-  console.log("Add to Cart Request Received");
   const itemId = req.body.id;
 
   try {
@@ -30,7 +29,7 @@ exports.addToCart = async (req, res) => {
     cart.totalPrice += item.price;
 
     req.flash('success', `${item.name} added to cart.`);
-    res.location(req.get("Referrer") || "/")
+    res.redirect('back')
   } catch (error) {
     console.error('Error adding to cart:', error);
     res.status(500).send('Internal Server Error');
