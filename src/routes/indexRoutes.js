@@ -12,6 +12,7 @@ const filterController = require('../controllers/filterController');
 router.get('/', mainController.getHomePage);
 router.get('/menu' , menuController.getMenuPage)
 router.post('/add-to-cart' , cartController.addToCart)
+router.get('/get-cart', cartController.getCart);
 router.get('/cart' , cartController.getCartPage)
 router.post('/cart/update' , cartController.updateCart)
 router.post('/checkout' , cartController.checkout)

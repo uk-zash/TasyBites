@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/floating.css">
     <style>
         /* Enhanced Menu Styles */
         .menu-container {
@@ -118,9 +119,9 @@
             color: green;
         }
 
-        .add-to-cart-btn {
+        .add-to-cart-button {
             width: 100%;
-            padding: 0.75rem;
+            padding: 12px;
             /* background: #065f46; */
             color: white;
             border: none;
@@ -334,12 +335,9 @@
                                     <h3 class="item-name"><%= item.name %></h3>
                                     <p class="item-description"><%= item.description %></p>
                                     <p class="item-price">₹<%= item.price %></p>
-                                    <form action="/add-to-cart" method="POST">
-                                        <input type="hidden" name="id" value="<%= item.id %>">
-                                        <button type="submit" class="add-to-cart-btn bg-blue-500 hover:bg-blue-600">
-                                            Add to Cart
-                                        </button>
-                                    </form>
+                                    <button data-id="<%= item.id %>" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
+                                        Add to Cart
+                                      </button>
                                 </div>
                             </div>
                         <% }) %>
@@ -370,12 +368,9 @@
                                 <h3 class="item-name"><%= item.name %></h3>
                                 <p class="item-description"><%= item.description %></p>
                                 <p class="item-price">₹<%= item.price %></p>
-                                <form action="/add-to-cart" method="POST">
-                                    <input type="hidden" name="id" value="<%= item.id %>">
-                                    <button type="submit" class="add-to-cart-btn bg-blue-500 hover:bg-blue-600">
-                                        Add to Cart
-                                    </button>
-                                </form>
+                                <button data-id="<%= item.id %>" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
+                                    Add to Cart
+                                  </button>
                             </div>
                         </div>
                     <% }) %>
@@ -387,6 +382,7 @@
     </main>
 
     <%- include("../partials/_footer") %>
+    <%- include("../partials/_floating_cart") %>
 
     <script>
         // Mobile menu toggle

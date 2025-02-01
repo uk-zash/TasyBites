@@ -1,3 +1,5 @@
+// controllers/cartController.js
+
 const { db } = require('../config/firebase');
 
 exports.addToCart = async (req, res) => {
@@ -7,8 +9,7 @@ exports.addToCart = async (req, res) => {
     const itemDoc = await db.collection('Menu').doc(itemId).get();
 
     if (!itemDoc.exists) {
-      req.flash('error', 'Item not found.');
-      return res.redirect('/menu');
+      return res.status(404).json({ success: false, message: 'Item not found.' });
     }
 
     const item = { id: itemDoc.id, ...itemDoc.data() };
@@ -28,13 +29,45 @@ exports.addToCart = async (req, res) => {
     cart.totalQty += 1;
     cart.totalPrice += item.price;
 
-    req.flash('success', `${item.name} added to cart.`);
-    res.redirect('back')
+    // Prepare cart items for response
+    const cartItems = Object.values(cart.items).map(cartItem => ({
+      id: cartItem.item.id,
+      name: cartItem.item.name,
+      price: cartItem.item.price,
+      qty: cartItem.qty,
+      imageURL: cartItem.item.imageURL,
+    }));
+
+    return res.json({
+      success: true,
+      message: `${item.name} added to cart.`,
+      totalQty: cart.totalQty,
+      totalPrice: cart.totalPrice,
+      cartItems,
+    });
   } catch (error) {
     console.error('Error adding to cart:', error);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
+
+exports.getCart = (req, res) => {
+  const cart = req.session.cart || { items: {}, totalQty: 0, totalPrice: 0 };
+  const cartItems = Object.values(cart.items).map(cartItem => ({
+    id: cartItem.item.id,
+    name: cartItem.item.name,
+    price: cartItem.item.price,
+    qty: cartItem.qty,
+    imageURL: cartItem.item.imageURL,
+  }));
+
+  res.json({
+    totalQty: cart.totalQty,
+    totalPrice: cart.totalPrice,
+    cartItems,
+  });
+};
+
 
 exports.getCartPage = (req, res) => {
   const cart = req.session.cart || { items: {}, totalQty: 0, totalPrice: 0 };

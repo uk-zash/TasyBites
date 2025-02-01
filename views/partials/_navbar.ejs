@@ -51,7 +51,8 @@
         <a href="/cart" class="cart">
           <!-- Cart Item Count Badge -->
           <% if (session.cart && session.cart.totalQty > 0) { %>
-            <span class="cart-badge"><%= session.cart.totalQty %></span>
+           <!-- Updated Cart Count with id="cart-count" -->
+<span id="cart-count" class="cart-badge"><%= session.cart && session.cart.totalQty > 0 ? session.cart.totalQty : 0 %></span>
           <% } %>
           <!-- Cart Icon -->
           <svg class="cart-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Cart">

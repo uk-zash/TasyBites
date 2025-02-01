@@ -43,10 +43,10 @@ app.set('views', path.join(__dirname, '../views'));
 
 app.set('view engine', 'ejs');
 // src/app.js
-app.use((req, res, next) => {
-    res.locals.session = req.session;
-    next();
-  });
+// app.use((req, res, next) => {
+//     res.locals.session = req.session;
+//     next();
+//   });
 
 
 

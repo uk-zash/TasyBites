@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/floating.css">
     <style>
 
        
@@ -250,7 +251,7 @@
 </head>
 <body>
     <%- include('../partials/_navbar') %>
-    <%- include('../partials/_flash_messages') %>
+
 
     <main class="container">
         <!-- Promotional Banner -->
@@ -303,12 +304,9 @@
                   <h3 class="product-name"><%= item.name %></h3>
                   <p class="product-description"><%= item.description %></p>
                   <p class="product-price">₹<%= item.price %></p>
-                  <form action="/add-to-cart" method="POST">
-                    <input type="hidden" name="id" value="<%= item.id %>">
-                    <button type="submit" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
-                      Add to Cart
-                    </button>
-                  </form>
+                  <button data-id="<%= item.id %>" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             <% }) %>
@@ -328,12 +326,9 @@
                 <h3 class="product-name"><%= item.name %></h3>
                 <p class="product-description"><%= item.description %></p>
                 <p class="product-price">₹<%= item.price %></p>
-                <form action="/add-to-cart" method="POST">
-                  <input type="hidden" name="id" value="<%= item.id %>">
-                  <button type="submit" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
+                <button data-id="<%= item.id %>" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
                     Add to Cart
                   </button>
-                </form>
               </div>
             </div>
           <% }) %>
@@ -348,7 +343,12 @@
   </div>
     </main>
 
+
+
     <%- include("../partials/_footer") %>
+    <%- include("../partials/_floating_cart") %>
+
+
 
     <script>
         // Mobile menu toggle
