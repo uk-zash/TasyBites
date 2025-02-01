@@ -45,7 +45,7 @@ exports.getHomePage = async (req, res) => {
     const mostViewedItemsSnapshot = await db
       .collection('Menu')
       .orderBy('views', 'desc')
-      .limit(6)
+      .limit(4)
       .get();
     const mostViewedItems = [];
     for (const doc of mostViewedItemsSnapshot.docs) {
