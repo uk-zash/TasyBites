@@ -11,7 +11,7 @@
         /* Search Page Styles */
         .search-container {
             max-width: 1280px;
-            margin: 5rem auto;
+            margin: 3.5rem auto;
             padding: 2rem 1rem;
         }
 
@@ -25,6 +25,10 @@
             font-weight: 700;
             color: #1f2937;
             margin-bottom: 0.5rem;
+        }
+
+        .search-title span{
+            color: #ff5200;
         }
 
         .results-count {
@@ -51,14 +55,20 @@
             }
         }
 
-        /* Product Card */
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease;
-        }
+       
+
+        /* Product Card Positioning */
+.product-card {
+  position: relative; /* Ensure badges are positioned relative to the card */
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+
+
 
         .product-card:hover {
             transform: translateY(-3px);
@@ -80,7 +90,7 @@
             font-size: 1rem;
             font-weight: 600;
             color: #1f2937;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             display: block;
             white-space: nowrap;
             overflow: hidden;
@@ -90,17 +100,17 @@
         .product-description {
             color: #6b7280;
             font-size: 0.875rem;
-            margin-bottom: 1rem;
+            /* margin-bottom: 1rem; */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .product-price {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             /* font-weight: 700; */
             color: #ff5200;
-            margin-bottom: 1rem;
+            margin:5px 0;
         }
 
         .add-to-cart-btn {
@@ -137,9 +147,33 @@
             }
 
             .product-details {
-                padding: 1rem;
+                padding: 15px;
             }
         }
+
+
+         /* Badge Styles */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.popular-badge {
+  background-color: #ff5200; /* Orange for Popular */
+}
+
+.most-viewed-badge {
+  background-color: #4b8ec8; /* Blue for Most Viewed */
+}
+
     </style>
 </head>
 <body>
@@ -148,7 +182,7 @@
 
     <main class="search-container">
         <div class="search-header">
-            <h1 class="search-title">Search Results for "<%= query %>"</h1>
+            <h1 class="search-title">Search Results for <span>"<%=query%>"</span> </h1>
             <% if (items && items.length > 0) { %>
                 <p class="results-count"><%= items.length %> results found</p>
             <% } %>
@@ -162,6 +196,9 @@
                             <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
                         </a>
                         <div class="product-details">
+                            <% if (item.popular) { %>
+                                <div class="badge popular-badge">Popular</div>
+                              <% } %>
                             <a href="/product/<%= item.id %>" class="product-name">
                                 <%= item.name %>
                             </a>

@@ -45,19 +45,21 @@
 
         @media (min-width: 768px) {
             .product-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
                 gap: 25px;
             }
         }
 
-        /* Product Card */
+    
+
         .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease;
-        }
+  position: relative; /* Ensure badges are positioned relative to the card */
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
 
         .product-card:hover {
             transform: translateY(-3px);
@@ -97,7 +99,7 @@
             font-size: 1.25rem;
             /* font-weight: 700; */
             color: #ff5200;
-            margin: 12px 0;
+            margin: 5px 0;
         }
 
         .add-to-cart-button {
@@ -211,6 +213,31 @@
     }
   }
 
+
+  /* Badge Styles */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.popular-badge {
+  background-color: #ff5200; /* Orange for Popular */
+}
+
+.most-viewed-badge {
+  background-color: #4b8ec8; /* Blue for Most Viewed */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -253,50 +280,57 @@
         </div>
 
         <!-- Popular Items -->
-        <h2 class="section-heading">Popular Items</h2>
+        <!-- <h2 class="section-heading">Popular Items</h2> -->
         <div class="product-grid">
             <% popularItems.forEach(item => { %>
-            <div class="product-card">
+              <div class="product-card">
                 <a href="/product/<%= item.id %>">
-                    <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
+                  <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
                 </a>
                 <div class="product-info">
-                    <h3 class="product-name"><%= item.name %></h3>
-                    <p class="product-description"><%= item.description %></p>
-                    <p class="product-price">₹<%= item.price %></p>
-                    <form action="/add-to-cart" method="POST">
-                        <input type="hidden" name="id" value="<%= item.id %>">
-                        <button type="submit" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
-                            Add to Cart
-                        </button>
-                    </form>
+                  <!-- Popular Badge -->
+                  <% if (item.popular) { %>
+                    <div class="badge popular-badge">Popular</div>
+                  <% } %>
+                  <h3 class="product-name"><%= item.name %></h3>
+                  <p class="product-description"><%= item.description %></p>
+                  <p class="product-price">₹<%= item.price %></p>
+                  <form action="/add-to-cart" method="POST">
+                    <input type="hidden" name="id" value="<%= item.id %>">
+                    <button type="submit" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
+                      Add to Cart
+                    </button>
+                  </form>
                 </div>
-            </div>
+              </div>
             <% }) %>
-        </div>
+          </div>
 
         <!-- Most Viewed Items -->
-        <h2 class="section-heading">Most Viewed</h2>
+        <!-- <h2 class="section-heading">Most Viewed</h2> -->
         <div class="product-grid">
-            <% mostViewedItems.forEach(item => { %>
+          <% mostViewedItems.forEach(item => { %>
             <div class="product-card">
-                <a href="/product/<%= item.id %>">
-                    <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
-                </a>
-                <div class="product-info">
-                    <h3 class="product-name"><%= item.name %></h3>
-                    <p class="product-description"><%= item.description %></p>
-                    <p class="product-price">₹<%= item.price %></p>
-                    <form action="/add-to-cart" method="POST">
-                        <input type="hidden" name="id" value="<%= item.id %>">
-                        <button type="submit" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
-                            Add to Cart
-                        </button>
-                    </form>
-                </div>
+              <a href="/product/<%= item.id %>">
+                <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
+              </a>
+              <div class="product-info">
+                <!-- Most Viewed Badge -->
+                <div class="badge most-viewed-badge">Best Sell</div>
+                <h3 class="product-name"><%= item.name %></h3>
+                <p class="product-description"><%= item.description %></p>
+                <p class="product-price">₹<%= item.price %></p>
+                <form action="/add-to-cart" method="POST">
+                  <input type="hidden" name="id" value="<%= item.id %>">
+                  <button type="submit" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
+                    Add to Cart
+                  </button>
+                </form>
+              </div>
             </div>
-            <% }) %>
+          <% }) %>
         </div>
+        
         <div style="text-align: right;">
         <a href="/menu">
         <button type="submit" class="add-to-cart-button bg-blue-500 hover:bg-blue-600" style="max-width: 125px;">
