@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/menu.css">
     <style>
+
+       
         /* Enhanced Responsive Design */
         .container {
             max-width: 1280px;
-            margin: 5rem auto;
-            padding: 0 15px;
+            margin: 4rem auto;
+            padding: 0 0;
         }
 
 
@@ -22,6 +24,10 @@
         /* Category Filter */
         .category-filter {
             margin: 15px 0;
+        }
+
+        .category-filter form{
+            padding: 0px 15px;
         }
 
         select {
@@ -40,6 +46,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
+            padding: 0px 15px;
             margin: 25px 0;
         }
 
@@ -251,11 +258,11 @@
         <div class="mb-8">
 
             <% if (bannerImageURL && bannerImageURL !== '') { %>
-                <div class="banner-preview bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="banner-preview bg-white shadow-md overflow-hidden">
                     <img src="<%= bannerImageURL %>" alt="Promotional Banner" class="w-full h-24 object-cover">
                 </div>
             <% } else if (bannerContent && bannerContent !== '') { %>
-                <div class="banner-preview bg-yellow-100 rounded-xl p-6 text-center">
+                <div class="banner-preview bg-yellow-100 p-6 text-center">
                     <p class="text-xl font-semibold text-yellow-800"><%= bannerContent %></p>
                 </div>
             <% } else { %>
@@ -332,7 +339,7 @@
           <% }) %>
         </div>
         
-        <div style="text-align: right;">
+        <div style="text-align: right; padding-right: 15px;">
         <a href="/menu">
         <button type="submit" class="add-to-cart-button bg-blue-500 hover:bg-blue-600" style="max-width: 125px;">
           View Menu

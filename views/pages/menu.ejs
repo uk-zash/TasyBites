@@ -12,8 +12,8 @@
         /* Enhanced Menu Styles */
         .menu-container {
             max-width: 1280px;
-            margin: 5rem auto;
-            padding: 0 1rem;
+            margin: 4rem auto;
+            /* padding: 0 1rem; */
         }
 
 
@@ -23,6 +23,9 @@
             position: relative;
         }
 
+        .category-filter form{
+            padding: 0px 15px;
+        }
         .category-select {
             width: 100%;
             max-width: 400px;
@@ -46,6 +49,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin: 1rem 0;
+            padding: 0px 15px;
         }
 
         @media (min-width: 768px) {
@@ -281,11 +285,11 @@
         <!-- Promotional Banner -->
         <div class="mb-8">
             <% if (bannerImageURL && bannerImageURL !== '') { %>
-                <div class="banner-preview bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="banner-preview bg-white shadow-md overflow-hidden">
                     <img src="<%= bannerImageURL %>" alt="Promotional Banner" class="w-full h-24 object-cover">
                 </div>
             <% } else if (bannerContent && bannerContent !== '') { %>
-                <div class="banner-preview bg-yellow-100 rounded-xl p-6 text-center">
+                <div class="banner-preview bg-yellow-100 p-6 text-center">
                     <p class="text-xl font-semibold text-yellow-800"><%= bannerContent %></p>
                 </div>
             <% } else { %>
