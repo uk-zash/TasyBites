@@ -251,94 +251,107 @@
 </head>
 <body>
     <%- include('../partials/_navbar') %>
+    <%- include('../partials/_flash_messages') %>
 
 
     <main class="container">
-        <!-- Promotional Banner -->
-        <!-- Promotional Banner -->
-        <div class="mb-8">
-
-            <% if (bannerImageURL && bannerImageURL !== '') { %>
-                <div class="banner-preview bg-white shadow-md overflow-hidden">
-                    <img src="<%= bannerImageURL %>" alt="Promotional Banner" class="w-full h-24 object-cover">
-                </div>
-            <% } else if (bannerContent && bannerContent !== '') { %>
-                <div class="banner-preview bg-yellow-100 p-6 text-center">
-                    <p class="text-xl font-semibold text-yellow-800"><%= bannerContent %></p>
-                </div>
-            <% } else { %>
-                <!-- <div class="bg-gray-100 rounded-xl p-6 text-center">
-                    <i class="fas fa-image text-4xl text-gray-300 mb-3"></i>
-                    <p class="text-gray-600">No promotional banner is currently set</p>
-                </div> -->
-            <% } %>
-        </div>
-
-        <!-- Category Filter -->
-        <div class="category-filter">
-            <form action="/menu" method="GET">
-                <select name="category" onchange="this.form.submit()">
-                    <option value="" <%= !selectedCategory ? 'selected' : '' %>>All Categories</option>
-                    <% categories.forEach(category => { %>
-                    <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>>
-                        <%= category %>
-                    </option>
-                    <% }) %>
-                </select>
-            </form>
-        </div>
-
-        <!-- Popular Items -->
-        <!-- <h2 class="section-heading">Popular Items</h2> -->
-        <div class="product-grid">
-            <% popularItems.forEach(item => { %>
-              <div class="product-card">
-                <a href="/product/<%= item.id %>">
-                  <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
-                </a>
-                <div class="product-info">
-                  <!-- Popular Badge -->
-                  <% if (item.popular) { %>
-                    <div class="badge popular-badge">Popular</div>
-                  <% } %>
-                  <h3 class="product-name"><%= item.name %></h3>
-                  <p class="product-description"><%= item.description %></p>
-                  <p class="product-price">₹<%= item.price %></p>
-                  <button data-id="<%= item.id %>" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
-                    Add to Cart
-                  </button>
-                </div>
+      <!-- Promotional Banner -->
+      <div class="mb-8">
+          <% if (bannerImageURL && bannerImageURL !== '') { %>
+              <div class="banner-preview bg-white shadow-md overflow-hidden">
+                  <img src="<%= bannerImageURL %>" alt="Promotional Banner" class="w-full h-24 object-cover">
               </div>
-            <% }) %>
-          </div>
-
-        <!-- Most Viewed Items -->
-        <!-- <h2 class="section-heading">Most Viewed</h2> -->
-        <div class="product-grid">
-          <% mostViewedItems.forEach(item => { %>
-            <div class="product-card">
-              <a href="/product/<%= item.id %>">
-                <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
-              </a>
-              <div class="product-info">
-                <!-- Most Viewed Badge -->
-                <div class="badge most-viewed-badge">Best Sell</div>
-                <h3 class="product-name"><%= item.name %></h3>
-                <p class="product-description"><%= item.description %></p>
-                <p class="product-price">₹<%= item.price %></p>
-                <button data-id="<%= item.id %>" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
-                    Add to Cart
-                  </button>
+          <% } else if (bannerContent && bannerContent !== '') { %>
+              <div class="banner-preview bg-yellow-100 p-6 text-center">
+                  <p class="text-xl font-semibold text-yellow-800"><%= bannerContent %></p>
               </div>
-            </div>
+          <% } %>
+      </div>
+  
+      <!-- Category Filter -->
+      <div class="category-filter">
+          <form action="/menu" method="GET">
+              <select name="category" onchange="this.form.submit()">
+                  <option value="" <%= !selectedCategory ? 'selected' : '' %>>All Categories</option>
+                  <% categories.forEach(category => { %>
+                  <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>>
+                      <%= category %>
+                  </option>
+                  <% }) %>
+              </select>
+          </form>
+      </div>
+  
+      <!-- Popular Items -->
+      <div class="product-grid">
+          <% popularItems.forEach(item => { %>
+              <div class="product-card" id="product-card-<%= item.id %>">
+                  <a href="/product/<%= item.id %>">
+                      <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
+                  </a>
+                  <div class="product-info">
+                      <!-- Popular Badge -->
+                      <% if (item.popular) { %>
+                          <div class="badge popular-badge">Popular</div>
+                      <% } %>
+                      <h3 class="product-name"><%= item.name %></h3>
+                      <p class="product-description"><%= item.description %></p>
+                      <p class="product-price">₹<%= item.price %></p>
+  
+                      <!-- Conditional Rendering of Buttons for Admin -->
+                      <% if (session && session.isAdmin) { %>
+                        <!-- Admin Controls: Edit and Delete -->
+                         <div class="flex flex-col gap-2">
+                        <button onclick="window.location.href='/admin/menu/edit/<%= item.id %>'" class="add-to-cart-button bg-yellow-500 pb-4 hover:bg-yellow-600">Edit</button>
+                        <button onclick="deleteProduct('<%= item.id %>')" class="add-to-cart-button bg-red-500 hover:bg-red-600">Delete</button>
+                    </div>
+                    <% } else { %>
+                        <!-- Regular User: Add to Cart -->
+                        <button data-id="<%= item.id %>" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
+                            Add to Cart
+                        </button>
+                    <% } %>
+                  </div>
+              </div>
           <% }) %>
-        </div>
-        
-        <div style="text-align: right; padding-right: 15px;">
+      </div>
+  
+      <!-- Most Viewed Items -->
+      <div class="product-grid">
+          <% mostViewedItems.forEach(item => { %>
+              <div class="product-card" id="product-card-<%= item.id %>">
+                  <a href="/product/<%= item.id %>">
+                      <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
+                  </a>
+                  <div class="product-info">
+                      <!-- Most Viewed Badge -->
+                      <div class="badge most-viewed-badge">Best Sell</div>
+                      <h3 class="product-name"><%= item.name %></h3>
+                      <p class="product-description"><%= item.description %></p>
+                      <p class="product-price">₹<%= item.price %></p>
+  
+                      <!-- Conditional Rendering of Buttons for Admin -->
+                      <% if (session && session.isAdmin) { %>
+                        <!-- Admin Controls: Edit and Delete -->
+                         <div class="flex flex-col gap-2">
+                        <button onclick="window.location.href='/admin/menu/edit/<%= item.id %>'" class="add-to-cart-button bg-yellow-500 pb-4 hover:bg-yellow-600">Edit</button>
+                        <button onclick="deleteProduct('<%= item.id %>')" class="add-to-cart-button bg-red-500 hover:bg-red-600">Delete</button>
+                    </div>
+                    <% } else { %>
+                        <!-- Regular User: Add to Cart -->
+                        <button data-id="<%= item.id %>" class="add-to-cart-button bg-blue-500 hover:bg-blue-600">
+                            Add to Cart
+                        </button>
+                    <% } %>
+                  </div>
+              </div>
+          <% }) %>
+      </div>
+  
+      <div style="text-align: right; padding-right: 15px;">
           <button onclick="window.location.href='/menu'" class="add-to-cart-button bg-blue-500 hover:bg-blue-600" style="max-width: 125px;">View Menu</button>
-       </div>
-    </main>
-
+      </div>
+  </main>
 
 
     <%- include("../partials/_footer") %>
@@ -362,6 +375,30 @@
                 });
             });
         });
+
+
+        function deleteProduct(productId) {
+        if (confirm("Are you sure you want to delete this product?")) {
+            fetch(`/admin/menu/delete/${productId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Product deleted successfully!");
+                    document.getElementById(`product-card-${productId}`).remove();
+                } else {
+                    alert("Failed to delete product. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+    }
     </script>
 </body>
 </html>

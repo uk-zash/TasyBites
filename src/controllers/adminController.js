@@ -150,7 +150,7 @@ exports.editMenuItem = async (req, res) => {
     await itemRef.update(updateData);
 
     req.flash('success', 'Menu item updated successfully.');
-    res.redirect('/admin/menu');
+    res.redirect('back');
   } catch (error) {
     console.error('Error updating menu item:', error);
     req.flash('error', 'An error occurred while updating the menu item.');
@@ -183,13 +183,18 @@ exports.deleteMenuItem = async (req, res) => {
     await itemRef.delete();
 
     req.flash('success', 'Menu item and associated image deleted successfully.');
-    res.redirect('/admin/menu');
+
+    // Send a success response for the AJAX request
+    res.json({ success: true });
   } catch (error) {
     console.error('Error deleting menu item:', error);
     req.flash('error', 'An error occurred while deleting the menu item.');
-    res.redirect('/admin/menu');
+
+    // Send a failure response for the AJAX request
+    res.json({ success: false });
   }
 };
+
 
 
 // Display the banner management page
