@@ -78,53 +78,68 @@ exports.getCartPage = (req, res) => {
 };
 
 exports.updateCart = (req, res) => {
-  const itemId = req.body.itemId;
-  const action = req.body.action;
+  try {
+    const itemId = req.body.itemId;
+    const action = req.body.action;
 
-  if (!req.session.cart || !req.session.cart.items[itemId]) {
-    req.flash('error', 'Item not found in cart.');
-    return res.redirect('/cart');
-  }
+    if (!req.session.cart || !req.session.cart.items[itemId]) {
+      return res.status(400).json({ success: false, message: 'Item not found in cart.' });
+    }
 
-  const cart = req.session.cart;
-  const cartItem = cart.items[itemId];
+    const cart = req.session.cart;
+    const cartItem = cart.items[itemId];
 
-  switch (action) {
-    case 'increase':
-      cartItem.qty += 1;
-      cart.totalQty += 1;
-      cart.totalPrice += cartItem.item.price;
-      break;
-    case 'decrease':
-      cartItem.qty -= 1;
-      cart.totalQty -= 1;
-      cart.totalPrice -= cartItem.item.price;
+    switch (action) {
+      case 'increase':
+        cartItem.qty += 1;
+        cart.totalQty += 1;
+        cart.totalPrice += cartItem.item.price;
+        break;
+      case 'decrease':
+        cartItem.qty -= 1;
+        cart.totalQty -= 1;
+        cart.totalPrice -= cartItem.item.price;
 
-      if (cartItem.qty <= 0) {
+        if (cartItem.qty <= 0) {
+          delete cart.items[itemId];
+        }
+        break;
+      case 'remove':
+        cart.totalQty -= cartItem.qty;
+        cart.totalPrice -= cartItem.item.price * cartItem.qty;
         delete cart.items[itemId];
-      }
-      break;
-    case 'remove':
-      cart.totalQty -= cartItem.qty;
-      cart.totalPrice -= cartItem.item.price * cartItem.qty;
-      delete cart.items[itemId];
-      break;
-    default:
-      break;
-  }
+        break;
+      default:
+        return res.status(400).json({ success: false, message: 'Invalid action.' });
+    }
 
-  if (cart.totalQty <= 0) {
-    req.session.cart = null;
-  }
+    if (cart.totalQty <= 0) {
+      req.session.cart = null;
+    }
 
-  res.redirect('/cart');
+    // Prepare response data
+    const updatedCart = req.session.cart || { items: {}, totalQty: 0, totalPrice: 0 };
+    const responseData = {
+      success: true,
+      totalQty: updatedCart.totalQty,
+      totalPrice: updatedCart.totalPrice,
+      itemQty: cartItem ? cartItem.qty : 0,
+      itemTotalPrice: cartItem ? cartItem.item.price * cartItem.qty : 0,
+      itemId: itemId,
+    };
+
+    return res.json(responseData);
+  } catch (error) {
+    console.error('Error updating cart:', error);
+    return res.status(500).json({ success: false, message: 'Server Error' });
+  }
 };
 
 // src/controllers/checkoutController.js
 exports.checkout = (req, res) => {
     const cart = req.session.cart;
   
-    if (!cart || cart.totalPrice < 350) {
+    if (!cart || cart.totalPrice < 250) {
       req.flash('error', 'Minimum order amount is ₹350 for delivery.');
       return res.redirect('/cart');
     }
