@@ -1,6 +1,7 @@
 // controllers/cartController.js
 
 const { db } = require('../config/firebase');
+require('dotenv').config();
 
 exports.addToCart = async (req, res) => {
   const itemId = req.body.id;
@@ -165,9 +166,8 @@ exports.checkout = (req, res) => {
       orderSummary += `• ${cartItem.qty} x *${cartItem.item.name}* *(@₹${cartItem.item.price}* each)\n`;
     });
     orderSummary += `\n*Total Amount:* ₹${cart.totalPrice}\n\n*Delivery Address:* \n${address}`;
-  
     const encodedMessage = encodeURIComponent(orderSummary);
-    const whatsappNumber = '918127625855'; // Replace with actual WhatsApp number
+    const whatsappNumber = process.env.PHONE_NUMBER; // Replace with actual WhatsApp number
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
   
     req.session.cart = null; // Clear the cart after checkout
