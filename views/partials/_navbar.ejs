@@ -29,12 +29,11 @@
         <!-- Show 'Call Now' only for regular users -->
         <% if (!session.isAdmin) { %>
           <div class="btnn">
-            <a href="tel:+919876543210" class="call-now">
+            <a href="tel:<%= process.env.PHONE_NUMBER %>" class="call-now">
               <span>Call Now</span>
             </a>
           </div>
         <% } %>
-        
 
         <!-- Admin Links (Show only if admin) -->
         <% if (session.isAdmin) { %>
@@ -105,7 +104,7 @@
     <!-- Show 'Call Now' only for regular users -->
     <% if (!session.isAdmin) { %>
       <div class="btnn">
-        <a href="tel:+919876543210" class="call-now">
+        <a href="tel:<%= process.env.PHONE_NUMBER %>" class="call-now">
           <span>Call Now</span>
         </a>
       </div>
