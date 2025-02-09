@@ -8,37 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="/css/nav.css">
   <link rel="stylesheet" href="/css/menu.css">
-    <style>
-        /* Improved toggle styles */
-.toggle-checkbox:checked {
-    right: 0;
-    background-color: #48bb78;
-    border-color: #48bb78; /* Ensure the border color is green when checked */
-}
+  <link rel="stylesheet" href="/css/add-menu.css">
 
-.toggle-checkbox:checked + .toggle-label {
-    background-color: #e0f8e0; /* Equivalent to bg-green-200 */
-}
-
-/* File upload feedback */
-.file-upload.dragover {
-    border-color: #3b82f6; /* Equivalent to border-blue-400 */
-    background-color: #eff6ff; /* Equivalent to bg-blue-50 */
-}
-
-.upload-preview {
-    display: none;
-}
-
-.has-file .upload-instructions {
-    display: none;
-}
-
-.has-file .upload-preview {
-    display: block;
-}
-
-    </style>
 </head>
 <body class="bg-gray-50">
 
@@ -158,65 +129,6 @@
         </form>
     </div>
 
-    <script>
-        // Fixed Toggle Functionality (remove previous toggle handler)
-        
-        // File Upload Handling
-        const fileInput = document.getElementById('file-input');
-        const uploadContainer = document.getElementById('file-upload-container');
-        const previewImage = document.getElementById('preview-image');
-        const fileName = document.getElementById('file-name');
-        const removeFileBtn = document.getElementById('remove-file');
-
-        // Handle file selection
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            handleFile(file);
-        });
-
-        // Handle drag and drop
-        uploadContainer.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadContainer.classList.add('dragover');
-        });
-
-        uploadContainer.addEventListener('dragleave', () => {
-            uploadContainer.classList.remove('dragover');
-        });
-
-        uploadContainer.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadContainer.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            fileInput.files = e.dataTransfer.files;
-            handleFile(file);
-        });
-
-        // Handle file removal
-        removeFileBtn.addEventListener('click', () => {
-            fileInput.value = '';
-            uploadContainer.classList.remove('has-file');
-            previewImage.src = '';
-            previewImage.classList.add('hidden');
-            fileName.textContent = '';
-        });
-
-        function handleFile(file) {
-            if (file) {
-                uploadContainer.classList.add('has-file');
-                fileName.textContent = file.name;
-
-                // Show preview for images
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        previewImage.src = e.target.result;
-                        previewImage.classList.remove('hidden');
-                    }
-                    reader.readAsDataURL(file);
-                }
-            }
-        }
-    </script>
+    <script src="/js/add_menu.js" defer></script>
 </body>
 </html>

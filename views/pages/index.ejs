@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="New Tasty Bites - Best burgers, pizzas, and fast food in Mahul, Azamgarh. Enjoy delicious meals with quick delivery near Phoolpur and Ambari.">
+    <meta name="description" content="New Tasty Bites - Best burgers, pizzas, and fast food in Mahul, Azamgarh. Enjoy delicious meals with quick delivery near Phoolpur and Ambari Azamgarh.">
     <meta name="keywords" content="burgers Mahul, pizza Azamgarh, fast food Phoolpur, ambari restaurant, tasty bites azamgarh">
     <title>New Tasty Bites - Best Fast Food in Mahul, Azamgarh | Eat Pizza Burger, Drink Lassi Faluda , Enjoy</title>
 
@@ -18,244 +18,7 @@
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/floating.css">
-    <style>
-
-       
-        /* Enhanced Responsive Design */
-        .container {
-            max-width: 1280px;
-            margin: 4rem auto;
-            padding: 0 0;
-        }
-
-
-
-        /* Category Filter */
-        .category-filter {
-            margin: 15px 0;
-        }
-
-        .category-filter form{
-            padding: 0px 15px;
-        }
-
-        select {
-            width: 100%;
-            max-width: 400px;
-            padding: 12px 40px 12px 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 1rem;
-            background: url('/images/arrow-down.svg') no-repeat right 15px center;
-            background-size: 16px;
-        }
-
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 0px 15px;
-            margin: 25px 0;
-        }
-
-        @media (min-width: 768px) {
-            .product-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 25px;
-            }
-        }
-
-    
-
-        .product-card {
-  position: relative; /* Ensure badges are positioned relative to the card */
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-}
-
-        .product-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-bottom: 2px solid #f3f4f6;
-        }
-
-        .product-info {
-            padding: 15px;
-        }
-
-        .product-name {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .product-description {
-            font-size: 0.875rem;
-            color: #6b7280;
-            height: 25px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .product-price {
-            font-size: 1.25rem;
-            /* font-weight: 700; */
-            /* color: #ff5200; */
-            color: green;
-            margin: 2px 0;
-        }
-
-        .add-to-cart-button {
-            width: 100%;
-            padding: 12px;
-            /* background: #065f46; */
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .add-to-cart-button:hover {
-            /* background: #064e3b; */
-        }
-
-        /* Mobile Optimizations */
-        @media (max-width: 480px) {
-            .product-grid {
-                gap: 12px;
-            }
-
-            .product-image {
-                height: 150px;
-            }
-
-            .product-info {
-                padding: 12px;
-            }
-
-            .product-name {
-                font-size: 0.9rem;
-            }
-
-            .product-price {
-                font-size: 1.1rem;
-                margin: 8px 0;
-            }
-
-            .add-to-cart-button {
-                padding: 10px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Section Headings */
-        .section-heading {
-            text-align: center;
-            font-size: 1.75rem;
-            margin: 35px 0 25px;
-            color: #1f2937;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section-heading:after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: #4b8ec8;
-            margin: 10px auto 0;
-        }
-
-        .banner {
-    height: 200px; /* Smaller height for the banner */
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  /* For image banners */
-  .banner img {
-    object-fit: cover;
-    width: 100%;
-    height: auto;
-    object-position: center;
-  }
-
-  /* For text banners */
-  .banner-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: #fbbf24; /* Light yellow background for text banner */
-    text-align: center;
-    padding: 10px;
-    font-size: 1.5rem; /* Default font size */
-    font-weight: 700;
-    color: #333;
-  }
-
-
-  /* Responsive Text for Small Screens */
-  @media (max-width: 768px) {
-    .banner-text {
-      font-size: 1.25rem; /* Smaller font on mobile */
-    }
-
-    .banner {
-      height: auto;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .banner-text {
-      font-size: 1rem; /* Even smaller font size on smaller screens */
-    }
-  }
-
-
-  /* Badge Styles */
-.badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: white;
-  text-transform: uppercase;
-  z-index: 1;
-}
-
-.popular-badge {
-  background-color: #fd5151; /* Orange for Popular */
-}
-
-.most-viewed-badge {
-  background-color: #4b8ec8; /* Blue for Most Viewed */
-}
-
-
-
-    </style>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
     <%- include('../partials/_navbar') %>
@@ -267,7 +30,7 @@
       <div class="mb-8">
           <% if (bannerImageURL && bannerImageURL !== '') { %>
               <div class="banner-preview bg-white shadow-md overflow-hidden">
-                  <img src="<%= bannerImageURL %>" alt="Promotional Banner" class="w-full h-24 object-cover">
+                  <img src="<%= bannerImageURL %>" alt="Promotional Banner - New Tasty Bites, Mahul Azamgarh" class="w-full h-24 object-cover" loading="lazy">
               </div>
           <% } else if (bannerContent && bannerContent !== '') { %>
               <div class="banner-preview bg-yellow-100 p-6 text-center">
@@ -295,7 +58,7 @@
           <% popularItems.forEach(item => { %>
               <div class="product-card" id="product-card-<%= item.id %>">
                   <a href="/product/<%= item.id %>">
-                      <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
+                      <img src="<%= item.imageURL %>" alt="<%= item.name %> - New Tasty Bites, Mahul Azamgarh" class="product-image" loading="lazy">
                   </a>
                   <div class="product-info">
                       <!-- Popular Badge -->
@@ -329,7 +92,7 @@
           <% mostViewedItems.forEach(item => { %>
               <div class="product-card" id="product-card-<%= item.id %>">
                   <a href="/product/<%= item.id %>">
-                      <img src="<%= item.imageURL %>" alt="<%= item.name %>" class="product-image">
+                      <img src="<%= item.imageURL %>" alt="<%= item.name %> - New Tasty Bites, Mahul Azamgarh" class="product-image" loading="lazy">
                   </a>
                   <div class="product-info">
                       <!-- Most Viewed Badge -->
@@ -366,47 +129,6 @@
     <%- include("../partials/_floating_cart") %>
 
 
-
-    <script>
-        // Mobile menu toggle
-        // document.getElementById('hamburger-menu').addEventListener('click', function() {
-        //     this.classList.toggle('active');
-        //     document.getElementById('mobile-menu').classList.toggle('open');
-        // });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-
-        function deleteProduct(productId) {
-        if (confirm("Are you sure you want to delete this product?")) {
-            fetch(`/admin/menu/delete/${productId}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Product deleted successfully!");
-                    document.getElementById(`product-card-${productId}`).remove();
-                } else {
-                    alert("Failed to delete product. Please try again.");
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-        }
-    }
-    </script>
+    <script src="/js/index.js" defer></script>
 </body>
 </html>

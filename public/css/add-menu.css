@@ -1,0 +1,28 @@
+        /* Improved toggle styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            background-color: #48bb78;
+            border-color: #48bb78; /* Ensure the border color is green when checked */
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #e0f8e0; /* Equivalent to bg-green-200 */
+        }
+        
+        /* File upload feedback */
+        .file-upload.dragover {
+            border-color: #3b82f6; /* Equivalent to border-blue-400 */
+            background-color: #eff6ff; /* Equivalent to bg-blue-50 */
+        }
+        
+        .upload-preview {
+            display: none;
+        }
+        
+        .has-file .upload-instructions {
+            display: none;
+        }
+        
+        .has-file .upload-preview {
+            display: block;
+        }
